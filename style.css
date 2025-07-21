@@ -1,3 +1,12 @@
+@font-face {
+  font-family: decotype;
+  src: url(./fonts/decotype.ttf);
+}
+
+.arabicText {
+font-family : decotype
+}
+
 *,
 *::before,
 *::after {
