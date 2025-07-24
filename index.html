@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" type="image/x-icon" href="./img/logo.png">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
-    <title>Khedemul Islam Madrasha</title>
+    <title>Darul Uloom Khademul Islam Madrasha</title>
   </head>
 
   <body class="body">
@@ -21,12 +21,12 @@
         <img srcset="" src="./img/logo.png" alt="" />
       </div>
       <div>
-        <p class="arabicText">دار العلوم خادم الاسلام مدرسة، صوادنغا</p>
+        <p class="arabicHeader">دار العلوم خادم الاسلام مدرسة، صوادنغا</p>
         <p>দারুল উলূম খাদেমুল ইসলাম মাদরাসা, চুয়াডাঙ্গা।</p>
         <p>Darul Uloom Khademul Islam Madrasha, Chuadanga</p>
       </div>
       <div class="tools">
-        <span
+        <span class="profile"
           ><svg
             fill="#333"
             xmlns="http://www.w3.org/2000/svg"
@@ -35,15 +35,52 @@
             <!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. -->
             <path
               d="M406.5 399.6C387.4 352.9 341.5 320 288 320l-64 0c-53.5 0-99.4 32.9-118.5 79.6C69.9 362.2 48 311.7 48 256C48 141.1 141.1 48 256 48s208 93.1 208 208c0 55.7-21.9 106.2-57.5 143.6zm-40.1 32.7C334.4 452.4 296.6 464 256 464s-78.4-11.6-110.5-31.7c7.3-36.7 39.7-64.3 78.5-64.3l64 0c38.8 0 71.2 27.6 78.5 64.3zM256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-272a40 40 0 1 1 0-80 40 40 0 1 1 0 80zm-88-40a88 88 0 1 0 176 0 88 88 0 1 0 -176 0z"
-            /></svg
-        ></span>
+            />
+          </svg>
+
+          <div class="profileFormWrapper">
+            <h3 class="profileForm__header">Register Your Profile</h3>
+            <form class="profileForm" action="">
+              <div class="profileForm__inputs">
+                <div>
+                  <label for="">Email :</label>
+                  <input
+                    type="email"
+                    name=""
+                    id=""
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <div>
+                  <label for="">Password :</label>
+                  <input
+                    type="password"
+                    name=""
+                    id=""
+                    placeholder="Enter your password"
+                  />
+                </div>
+              </div>
+              <div class="profileForm__saveToLocal">
+                <div>
+                  <input type="checkbox" name="" id="" />
+                  <p><a href="">Remember me</a></p>
+                </div>
+                <p><a href="">Forget password ?</a></p>
+              </div>
+              <div class="profileForm__btns">
+                <button class="btn" type="submit">Submit</button>
+                <button class="btn" type="reset">Reset</button>
+              </div>
+            </form>
+          </div>
+        </span>
         <span
           ><svg
             fill="#333"
             height="200px"
             width="200px"
             version="1.1"
-            id="Capa_1"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             viewBox="0 0 470 470"
@@ -83,7 +120,6 @@
               stroke-linejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
-              <title>dark-mode</title>
               <g id="Layer_2" data-name="Layer 2">
                 <g id="Icons">
                   <g>
@@ -215,14 +251,18 @@
           <nav class="nav">
             <h2>
               Menu
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <svg
+                class="rotateSVG"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
                 <!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. -->
                 <path
                   d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"
                 />
               </svg>
             </h2>
-            <ul class="mainNav">
+            <ul class="mainNav animateScroll">
               <li><a href="#result">Result</a></li>
               <li>
                 <a href="#achievements">Achievements</a>
@@ -240,10 +280,27 @@
           </nav>
         </div>
       </div>
+      <!-- Daily Quotes -->
+      <div class="container px-body quote-wrapper" data-quote>
+        <div class="quote">
+          <h3 class="quote__header animateScroll">হাদিসের বাণী</h3>
+          <p class="quote__lead animateScroll">
+            নবী (সাল্লাল্লাহু ‘আলাইহি ওয়া সাল্লাম) বলেছেনঃ
+          </p>
+          <p class="quote__text lead animateScroll">
+            দ্বীন হচ্ছে শুভকামনা। আমরা জিজ্ঞেস করলামঃ কার জন্য? তিনি বললেনঃ
+            আল্লাহ্, তাঁর কিতাবের, তাঁর রাসূলের, মুসলিম নেতাদের এবং সকল মুসলিমের
+            জন্য।
+          </p>
+          <strong class="quote__ref animateScroll"
+            >মুসলিমঃ ৫৫, ৪০ হাদিস, হাদিস নং ৭, মান: সহিহ হাদিস</strong
+          >
+        </div>
+      </div>
 
       <!-- Notices -->
       <div class="container notices px-body">
-        <div class="notice__sort">
+        <div class="notice__sort animateScroll">
           <h2>Class</h2>
           <span>All</span>
           <span>Jamat e Mizan</span>
@@ -253,7 +310,7 @@
           <span>Mishkat</span>
           <span>Jamat Takmil / Dawra Hadith</span>
         </div>
-        <div class="notice__year">
+        <div class="notice__year animateScroll">
           <h2>Year</h2>
           <span>2020</span>
           <span>2021</span>
@@ -262,7 +319,7 @@
           <span>2024</span>
           <span>2025</span>
         </div>
-        <div class="notice__list">
+        <div class="notice__list animateScroll">
           <h2>Notices</h2>
           <div class="list">Mizan Test Exam 2025</div>
           <div class="list">Jamat e *** Result 2025</div>
@@ -282,34 +339,34 @@
       <div class="container px-body" id="achievements">
         <h2>Achievements</h2>
         <div class="achieve">
-          <div class="box">
-            <img src="./img/nature1.jpeg" alt="" />
-            <p class="achieve__text py-1">Passing Grade A+</p>
+          <div class="box animateScroll">
+            <img class="animateScroll" src="./img/nature1.jpeg" alt="" />
+            <p class="achieve__text py-1 animateScroll">Passing Grade A+</p>
+            <a class="btn animateScroll" href="">Read more</a>
+          </div>
+          <div class="box animateScroll">
+            <img class="animateScroll" src="./img/nature2.jpeg" alt="" />
+            <p class="achieve__text py-1 animateScroll">Passing Grade A</p>
             <a class="btn" href="">Read more</a>
           </div>
-          <div class="box">
-            <img src="./img/nature2.jpeg" alt="" />
-            <p class="achieve__text py-1">Passing Grade A</p>
+          <div class="box animateScroll">
+            <img class="animateScroll" src="./img/nature3.jpeg" alt="" />
+            <p class="achieve__text py-1 animateScroll">Passing Grade A-</p>
             <a class="btn" href="">Read more</a>
           </div>
-          <div class="box">
-            <img src="./img/nature3.jpeg" alt="" />
-            <p class="achieve__text py-1">Passing Grade A-</p>
+          <div class="box animateScroll">
+            <img class="animateScroll" src="./img/nature4.jpeg" alt="" />
+            <p class="achieve__text py-1 animateScroll">Passing Grade B</p>
             <a class="btn" href="">Read more</a>
           </div>
-          <div class="box">
-            <img src="./img/nature4.jpeg" alt="" />
-            <p class="achieve__text py-1">Passing Grade B</p>
+          <div class="box animateScroll">
+            <img class="animateScroll" src="./img/nature5.jpeg" alt="" />
+            <p class="achieve__text py-1 animateScroll">Passing Grade C</p>
             <a class="btn" href="">Read more</a>
           </div>
-          <div class="box">
-            <img src="./img/nature5.jpeg" alt="" />
-            <p class="achieve__text py-1">Passing Grade C</p>
-            <a class="btn" href="">Read more</a>
-          </div>
-          <div class="box">
-            <img src="./img/nature3.jpeg" alt="" />
-            <p class="achieve__text py-1">
+          <div class="box animateScroll">
+            <img class="animateScroll" src="./img/nature3.jpeg" alt="" />
+            <p class="achieve__text py-1 animateScroll">
               Annual Exam result of 2025 for all the classes have been published
               since 5/12/2025
             </p>
@@ -321,63 +378,63 @@
       <div class="container px-body">
         <h2>Events & News</h2>
         <div class="events">
-          <div class="event__list box">
-            <div class="top__event">
-              <img src="./img/nature5.jpeg" alt="" />
+          <div class="event__list box animateScroll">
+            <div class="top__event animateScroll">
+              <img class="animateScroll" src="./img/nature5.jpeg" alt="" />
             </div>
-            <p class="py-2">
+            <p class="py-2 animateScroll">
               A prominent scholar from khulna visited Khademul Islam Madrasha
             </p>
-            <a class="btn" href="">View more</a>
+            <a class="btn animateScroll" href="">View more</a>
           </div>
 
-          <div class="event__list box">
-            <img src="./img/nature3.jpeg" alt="" />
-            <p class="py-2">
+          <div class="event__list box animateScroll">
+            <img class="animateScroll" src="./img/nature3.jpeg" alt="" />
+            <p class="py-2 animateScroll">
               A prominent scholar from khulna visited Khademul Islam Madrasha
             </p>
-            <a class="btn" href="">View more</a>
+            <a class="btn animateScroll" href="">View more</a>
           </div>
 
-          <div class="event__list box">
-            <img src="./img/nature2.jpeg" alt="" />
-            <p class="py-2">
+          <div class="event__list box animateScroll">
+            <img class="animateScroll" src="./img/nature2.jpeg" alt="" />
+            <p class="py-2 animateScroll">
               A prominent scholar from khulna visited Khademul Islam Madrasha
             </p>
-            <a class="btn" href="">View more</a>
+            <a class="btn animateScroll" href="">View more</a>
           </div>
 
-          <div class="event__list box">
-            <img src="./img/nature1.jpeg" alt="" />
-            <p class="py-2">
+          <div class="event__list box animateScroll">
+            <img class="animateScroll" src="./img/nature1.jpeg" alt="" />
+            <p class="py-2 animateScroll">
               A prominent scholar from khulna visited Khademul Islam Madrasha
             </p>
-            <a class="btn" href="">View more</a>
+            <a class="btn animateScroll" href="">View more</a>
           </div>
         </div>
       </div>
 
-      <div class="container px-body">
+      <div class="container px-body animateScroll">
         <!-- notice & slide -->
         <div class="persons">
           <div class="founders">
             <h2>Founder name</h2>
-            <img src="./img/nature1.jpeg" alt="" />
+            <img src="./img/avator_63.jpg" alt="" />
           </div>
           <div class="heads">
             <h2>Principal</h2>
-            <img src="./img/nature2.jpeg" alt="" />
+            <img src="./img/avator_64.jpg" alt="" />
             <h2>Chairman</h2>
-            <img src="./img/nature3.jpeg" alt="" />
+            <img src="./img/avator_138.jpg" alt="" />
           </div>
         </div>
       </div>
       <div class="container px-body text-center" id="result">
-        <h2>Check Your Result:</h2>
-        <div class="result box">
+        <h2 class="animateScroll">Check Your Result:</h2>
+        <div class="result boxanimateScroll">
           <div class="resultSection">
             <h2>Select Year and Class:</h2>
-            <div class="year">
+            <div class="year animateScroll">
               <label for="year">Year</label>
               <select value="">
                 <option name="" id="">2023</option>
@@ -385,7 +442,7 @@
                 <option name="" id="" selected>2025</option>
               </select>
             </div>
-            <div class="class">
+            <div class="class animateScroll">
               <label for="class">Class</label>
               <select value="">
                 <option name="" id="">Mizan</option>
@@ -396,20 +453,31 @@
                 <option name="" id="">Takmil</option>
               </select>
             </div>
-            <div>
+            <div class="animateScroll">
               <button class="btn submit">Submit</button>
               <button class="btn reset">Reset</button>
             </div>
           </div>
 
           <div class="output process processing">
-            
             <h2>Download PDF :</h2>
-            <span class="reference">* Mizan 2025</span>
-            <p><a href="">Google Drive</a></p>
-            <p><a href="">Dropbox</a></p>
+            <span class="reference"></span>
+            <div class="skChase">
+              <div class="skChase-dot"></div>
+              <div class="skChase-dot"></div>
+              <div class="skChase-dot"></div>
+              <div class="skChase-dot"></div>
+              <div class="skChase-dot"></div>
+              <div class="skChase-dot"></div>
+            </div>
+            <p class="previewPDF">Preview</p>
+            <p><a class="gdrive" href="">Google Drive</a></p>
             <p class="text-entry"></p>
           </div>
+        </div>
+        <div class="PDFReader">
+          <iframe src="./BootstrapCS.pdf" frameborder="0"></iframe>
+          <div class="close">&times;</div>
         </div>
       </div>
     </main>
@@ -420,7 +488,7 @@
       <div class="footer">
         <div class="links">
           <div>
-            <h2>Important Links</h2>
+            <h2 class="animateScroll">Important Links</h2>
             <div class="importLinks">
               <a href="">Nurani Iqra Board</a>
               <a href="">Nurani Chittagong Board</a>
@@ -431,7 +499,7 @@
           </div>
 
           <div>
-            <h2>Social Links</h2>
+            <h2 class="animateScroll">Social Links</h2>
             <div class="socialLinks">
               <a href="">Facebook</a>
               <a href="">Twitter</a>
@@ -441,24 +509,27 @@
           </div>
 
           <div>
-            <h2>Download Links</h2>
+            <h2 class="animateScroll">Download Links</h2>
             <div class="downloadLinks">
               <a href="">Application Template</a>
               <a href="">Final result 2025</a>
-              <a href="https://drive.google.com/file/d/1mJ3lZ685w_6aIWSd50De9L73uSsM_nZT/view?usp=drive_link">Exam 2025 Routine</a>
+              <a
+                href="https://drive.google.com/file/d/1mJ3lZ685w_6aIWSd50De9L73uSsM_nZT/view?usp=drive_link"
+                >Exam 2025 Routine</a
+              >
             </div>
           </div>
         </div>
 
         <div class="address">
           <div>
-            <h2>Address</h2>
+            <h2 class="animateScroll">Address</h2>
             <p>Farm Para, Chuadanga Sadar, Chuadanga</p>
             <p>Mobile: 01x0000000</p>
-            <p>Email: khadimulislammadrasa5@gmail.com</p>
+            <p>Email: khadimulislammadrasa5.com</p>
           </div>
           <div>
-            <img src="./img/nature5.jpeg" alt="" />
+            <img class="animateScroll" src="./img/nature5.jpeg" alt="" />
           </div>
         </div>
 
@@ -470,6 +541,6 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="./bootstrap.bundle.js"></script>
+    <script src="./bootstrap.bundle"></script>
   </body>
 </html>
