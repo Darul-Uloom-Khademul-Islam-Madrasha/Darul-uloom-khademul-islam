@@ -31,7 +31,7 @@ select {
 }
 
 input:focus:not([type="checkbox"]) {
-  background-color: var(--clr-light);
+  background-color: var(--clr-white-50);
   outline: 3px solid var(--clr-light-sec);
 }
 
@@ -67,6 +67,7 @@ picture {
   --fs-900: 2rem;
   --fs-700: 1.75rem;
   --fs-500: 1.3rem;
+  --fs-400: 1rem;
   --fs-300: 0.75rem;
 
   --clr-accent: rgb(49, 67, 44);
@@ -110,6 +111,14 @@ picture {
 @font-face {
   font-family: SolaimanLipi;
   src: url("./fonts/SolaimanLipi.ttf");
+}
+
+.robotoFont {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
 /* Body initial setup */
@@ -326,8 +335,6 @@ a:hover {
   transition: all 100ms linear;
 }
 
-
-
 /* actives */
 button:active,
 a:active,
@@ -338,8 +345,8 @@ span:active,
   transform: scale(0.98);
 }
 
-.profile > svg:active {
-  transform: scale(1);
+.tools > *:active {
+  transform: initial !important;
 }
 /* update */
 .update {
@@ -412,16 +419,9 @@ span:active,
   position: relative;
 }
 
-/* .tools *:nth-child(2) {
-  margin-top: 35px; /* fill the icon's space 
-  outline: 5px solid red;
-  } */
-
-.profileFormWrapper {
-  display: block;
-}
 .profile {
   position: absolute;
+  background-color: rgb(206, 212, 218);
   top: calc(var(--size-100) * -1);
   margin: 0 auto;
   display: inline-block;
@@ -430,6 +430,27 @@ span:active,
   border-radius: 12px;
   transition: all 1s ease;
   z-index: 100 !important;
+  user-select: none;
+}
+
+.toggleProfile {
+  width: calc(100vw - 55px);
+  height: 60vh;
+  background-color: rgb(206, 212, 218);
+  box-shadow: 0 0 2px 0 var(--clr-light-sec);
+}
+
+@media (min-width: 48em) {
+  .profile + span {
+    margin-top: 35px;
+  }
+
+  .toggleProfile {
+    width: calc(50vw - 55px);
+    height: 60vh;
+    background-color: rgb(206, 212, 218);
+    box-shadow: 0 2px 10px 0 var(--clr-light-sec);
+  }
 }
 
 .profile svg {
@@ -447,7 +468,7 @@ span:active,
   color: var(--clr-light-sec);
   text-shadow: initial;
   padding: var(--size-500);
-  display: grid;
+  display: none;
 }
 
 .profileForm {
@@ -467,7 +488,6 @@ span:active,
 
 .profileForm__inputs input {
   padding: var(--size-400);
-
 }
 
 .profileForm__inputs div {
@@ -502,23 +522,52 @@ span:active,
   justify-content: space-evenly;
 }
 
+@media (max-width: 48em) {
+  .profile {
+    margin-top: var(--size-100);
+  }
+  .profileForm__inputs * {
+    width: 100%;
+    margin-bottom: -20px;
+  }
+  .profileForm__saveToLocal {
+    display: flex;
+    gap: var(--size-100);
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profileForm__saveToLocal *,
+  .profileForm__btns * {
+    font-size: var(--size-400);
+  }
+
+  .profileForm__btns * {
+    width: 100%;
+  }
+}
+
+@media (min-width: 48em) and (max-width: 64em) {
+  .profileForm__saveToLocal {
+    display: flex;
+    gap: var(--size-100);
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -20px;
+  }
+
+  .nav h2 {
+    padding-top: var(--size-300);
+  }
+}
+
 .profileForm__saveToLocal *:first-child {
   display: flex;
-  gap: var(--size-100); 
+  gap: var(--size-100);
 }
 
 .profileForm__saveToLocal input {
   transform: scale(1.5);
-}
-
-/* temp */
-/* //   profile.style.width = "calc(100vw - 55px)";
-//   profile.style.height = "60vh"; */
-
-.profile {
-  width: calc(100vw - 55px);
-  height: 60vh;
-  background: rgb(206, 212, 218);
 }
 
 /* main nav */
@@ -530,12 +579,6 @@ span:active,
   display: grid;
   grid-auto-flow: column;
   justify-content: space-between;
-}
-
-@media (min-width: 48em) and (max-width: 64em) {
-  .nav h2 {
-    padding-top: var(--size-300);
-  }
 }
 
 .nav svg {
@@ -1167,6 +1210,10 @@ span:active,
     font-size: var(--fs-600);
   }
 
+  .title__header {
+    font-size: var(--fs-700);
+  }
+
   .logo img {
     width: 100%;
   }
@@ -1254,6 +1301,10 @@ span:active,
 
 /* Desktop 1024px+ */
 @media (min-width: 64em) {
+  .title__header {
+    font-size: var(--fs-900);
+  }
+
   .container.mergeNav {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1572,4 +1623,3 @@ footer > img {
   white-space: nowrap !important;
   border: 0 !important;
 }
-
