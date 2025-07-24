@@ -133,21 +133,27 @@ document.querySelectorAll(".animateScroll").forEach((e) => {
 // profile page
 
 const profile = document.querySelector(".profile");
+const profileFormWrapper = document.querySelector(".profileFormWrapper");
 const profileSVG = document.querySelector(".profile > svg");
-const body = document.querySelector('body');
 
-profile.addEventListener("click", () => {
-  profile.style.width = "calc(100vw - 55px)";
-  profile.style.height = "60vh";
-  profile.style.backgroundColor = "rgb(206, 212, 218)";
-  profile.classList.add('box');
-  body.style.backgroundColor = 'rgba(0,0,0,0.5) !important';
+profileSVG.addEventListener("click", () => {
+  profile.classList.toggle("toggleProfile");
 
-  profileSVG.style.width = "calc(100vw - 80px)";
-  profileSVG.style.height = "60vh";
-  profileSVG.style.transform = "rotate(180deg)";
-
-  setTimeout(() => {
-    profileSVG.style.transform = "rotate(360deg)";
-  }, 1000);
+  if (profileFormWrapper.style.display === "grid") {
+    profileFormWrapper.style.display = "none";
+    profileSVG.innerHTML = `<svg
+            fill="#333"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <!-- FontAwesomeFree6.6.0by@fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. -->
+            <path
+              d="M406.5 399.6C387.4 352.9 341.5 320 288 320l-64 0c-53.5 0-99.4 32.9-118.5 79.6C69.9 362.2 48 311.7 48 256C48 141.1 141.1 48 256 48s208 93.1 208 208c0 55.7-21.9 106.2-57.5 143.6zm-40.1 32.7C334.4 452.4 296.6 464 256 464s-78.4-11.6-110.5-31.7c7.3-36.7 39.7-64.3 78.5-64.3l64 0c38.8 0 71.2 27.6 78.5 64.3zM256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-272a40 40 0 1 1 0-80 40 40 0 1 1 0 80zm-88-40a88 88 0 1 0 176 0 88 88 0 1 0 -176 0z"
+            />
+          </svg>`;
+  } else {
+    profileFormWrapper.style.display = "grid";
+    profileSVG.innerHTML =
+      '<svg fill="crimson" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/></svg>';
+  }
 });
