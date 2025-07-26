@@ -92,7 +92,7 @@ picture {
   --size-300: 3rem;
   --size-400: 1rem;
   --size-500: 2rem;
-  --size-600: 3rem;
+  --size-600: 3.5rem;
 
   --fw-300: 300;
 
@@ -210,6 +210,10 @@ p {
   font-weight: 700;
 }
 
+.d-none {
+  display: none !important;
+}
+
 .lead {
   font-weight: var(--fw-300);
   font-size: 1.25rem;
@@ -229,6 +233,10 @@ p {
   padding: 5px;
   color: var(--clr-quote-text);
   box-shadow: 0 1px 1px -0.5px var(--clr-quote-text);
+}
+
+.remove-pointer {
+  pointer-events: none;
 }
 
 .box {
@@ -256,8 +264,11 @@ button:hover {
 }
 
 svg:hover {
-  fill: var(--clr-light-sec) !important;
+  fill: var(--clr-accent) !important;
   cursor: pointer;
+}
+.editor div svg:hover {
+  fill: var(--clr-light-50) !important;
 }
 
 .mainNav li:hover {
@@ -314,8 +325,13 @@ svg:hover {
   user-select: none;
 }
 
-a:hover {
+a:hover,
+.quote-wrapper .quoteEditor:hover {
   filter: brightness(120%);
+}
+
+input[name="password"] + div:hover::after {
+  filter: brightness(80%);
 }
 
 /* hover smoother */
@@ -331,7 +347,8 @@ svg:hover,
 .close:hover,
 .output p:hover,
 .links a:hover,
-a:hover {
+a:hover,
+.quote-wrapper .quoteEditor:hover {
   transition: all 100ms linear;
 }
 
@@ -341,18 +358,70 @@ a:active,
 svg:active,
 li:active,
 span:active,
-.close:active {
+.close:active,
+.quote-wrapper .quoteEditor:active {
   transform: scale(0.98);
+  user-select: none;
 }
 
 .tools > *:active {
   transform: initial !important;
 }
-/* update */
-.update {
-  background-color: #31432c;
-  color: var(--clr-white);
+/* editor */
+.editor {
+  background-color: var(--clr-accent);
+  color: var(--clr-quote-text);
+  padding: calc(var(--size-100) * 1) calc(var(--size-100) * 2);
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editor p span {
+  font-weight: 300;
+  font-family: "Roboto" sans-serif;
+}
+
+.editor div {
+  display: grid;
+  grid-auto-flow: column;
+  place-items: center;
+  gap: var(--size-400);
+}
+
+.editor div a {
+  margin-top: 5px;
+}
+
+.editor div svg {
+  width: var(--size-500);
+}
+
+.editor div {
+  position: relative;
+}
+.editor div::before {
+  position: absolute;
+  content: attr(data-log);
+  left: -150%;
+  top: 150%;
+  background-color: var(--clr-quote-header);
+  width: min-content;
+  border-radius: var(--radius-normal);
+  z-index: 1;
+  border-bottom: 2px solid;
+}
+
+.editor div.active::before {
   padding: var(--size-100);
+}
+
+.editor .signOutPrompt {
+  position: absolute;
+  background-color: var(--clr-quote-header);
+  padding: var(--size-100);
+  border-radius: var(--radius-normal);
+  right: var(--size-100);
   display: none;
 }
 
@@ -384,7 +453,6 @@ span:active,
 .tools svg {
   width: 35px;
   height: 35px;
-  fill: var(--clr-accent);
 }
 
 /* main container */
@@ -433,9 +501,35 @@ span:active,
   user-select: none;
 }
 
+.profileNotice {
+  position: fixed;
+  top: calc(var(--size-100) - 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--clr-quote-text);
+  border-radius: var(--radius-normal);
+  width: fit-content;
+  padding: var(--size-100);
+  box-shadow: 0 0 3px 0 var(--clr-light-sec);
+  text-shadow: none;
+  z-index: 100;
+  display: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    top: -30px;
+  }
+  100% {
+    opacity: 1;
+    top: calc(var(--size-100) - 5px);
+  }
+}
+
 .toggleProfile {
   width: calc(100vw - 55px);
-  height: 60vh;
+  height: max-content;
   background-color: rgb(206, 212, 218);
   box-shadow: 0 0 2px 0 var(--clr-light-sec);
 }
@@ -447,7 +541,6 @@ span:active,
 
   .toggleProfile {
     width: calc(50vw - 55px);
-    height: 60vh;
     background-color: rgb(206, 212, 218);
     box-shadow: 0 2px 10px 0 var(--clr-light-sec);
   }
@@ -488,6 +581,7 @@ span:active,
 
 .profileForm__inputs input {
   padding: var(--size-400);
+  position: relative;
 }
 
 .profileForm__inputs div {
@@ -496,10 +590,28 @@ span:active,
   justify-self: center;
   width: 80%;
   margin-bottom: var(--size-400);
+  position: relative;
 }
 
 .profileForm__inputs div label {
   padding-block: var(--size-100);
+}
+
+input[name="password"] + div::after {
+  content: "";
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='gray'  viewBox='0 0 576 512'%3E%3C!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --%3E%3Cpath d='M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  aspect-ratio: 1;
+}
+
+input[name="password"] + div {
+  position: absolute;
+  bottom: 0;
+  right: var(--size-100);
+  aspect-ratio: 1;
+  width: 25px;
+  height: auto;
 }
 
 .profileFormWrapper,
@@ -526,9 +638,15 @@ span:active,
   .profile {
     margin-top: var(--size-100);
   }
-  .profileForm__inputs * {
+
+  .profileForm {
+    row-gap: var(--size-500);
+  }
+  .profileForm__inputs div * {
     width: 100%;
+    padding-block: var(--size-100);
     margin-bottom: -20px;
+    margin-top: var(--size-100);
   }
   .profileForm__saveToLocal {
     display: flex;
@@ -570,6 +688,21 @@ span:active,
   transform: scale(1.5);
 }
 
+@keyframes warning {
+  0% {
+    outline-color: rgba(220, 20, 60, 0.5);
+  }
+  25% {
+    outline-color: rgba(220, 20, 60, 1);
+  }
+  50% {
+    outline-color: rgba(220, 20, 60, 0.5);
+  }
+  100% {
+    outline-color: rgba(220, 20, 60, 1);
+  }
+}
+
 /* main nav */
 .mainNav {
   display: none;
@@ -606,12 +739,77 @@ span:active,
   background-size: cover;
   background-position-x: center;
   min-height: 300px;
+  position: relative;
 }
 
-.quote-wrapper div {
+.quote-wrapper div,
+.quote-wrapper form {
   background-color: rgb(0, 0, 0, 0.7);
   min-height: 300px;
   border-radius: var(--radius-normal);
+}
+.quote-wrapper .quoteEditor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(var(--size-100) * 3);
+  min-height: calc(var(--size-100) * 3);
+  background-color: var(--clr-quote-header);
+  color: var(--clr-quote-text);
+  z-index: 10;
+  display: none;
+  place-content: center;
+}
+
+.quote-wrapper .quoteEditorWindow {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--size-100) * -2);
+  text-align: center;
+  width: 100%;
+  z-index: 10;
+  display: grid;
+  transform: translateX(-50%);
+  gap: var(--size-100);
+  padding: var(--size-100);
+  box-shadow: 0 2px 5px 0 var(--clr-light-sec);
+}
+
+.quote-wrapper .quoteEditorWindow * {
+  width: 100%;
+}
+.quote-wrapper .quoteEditorWindow *:focus {
+  background-color: var(--clr-light);
+}
+
+@media (max-width: 48em) {
+  .quote-wrapper .quoteEditorWindow * {
+    height: 100%;
+  }
+
+  .quote-wrapper .quoteEditorWindow *:nth-child(4) {
+    height: 30vh;
+  }
+}
+
+@media (min-width: 48em) {
+  .quote-wrapper .quoteEditorWindow {
+    width: 50%;
+    height: calc(100% + 100px);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto auto 1fr;
+  }
+  .quote-wrapper .quoteEditorWindow *:nth-child(1) {
+    grid-column: 1 /-1;
+    font-size: var(--fs-500);
+  }
+  .quote-wrapper .quoteEditorWindow *:nth-child(4) {
+    grid-column: 1 /-1;
+    height: 20vh;
+  }
+  .quote-wrapper .quoteEditorWindow *:nth-child(5) {
+    grid-column: 1 /-1;
+  }
 }
 
 .container[data-quote] {
@@ -627,7 +825,7 @@ span:active,
 }
 
 .quote *:not(:nth-child(2)) {
-  margin-bottom: var(--size-600) !important;
+  margin-bottom: var(--size-300) !important;
 }
 
 .quote__header,
@@ -1071,6 +1269,7 @@ span:active,
   }
 }
 .close {
+  display: none;
   width: fit-content;
   aspect-ratio: 1;
   padding: 0 var(--size-200);
@@ -1151,7 +1350,7 @@ span:active,
 .address p {
   color: var(--clr-light-sec);
   font-weight: var(--fw-300);
-  font-size: 1.2rem;
+  font-size: var(--fs-400);
 }
 
 .footer .links {
