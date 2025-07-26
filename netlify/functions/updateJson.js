@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = import('node-fetch');
 
 exports.handler = async (event) => {
   // Parse form data
