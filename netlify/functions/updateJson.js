@@ -40,13 +40,9 @@ exports.handler = async (event) => {
     });
 
     if (!updateRes.ok) throw new Error(`GitHub update error: ${await updateRes.text()}`);
-    return { statusCode: 200, body: '✅ Successfully updated data.json!' };
+    return { statusCode: 200, body: '✅ Successfully Updated!' };
 
   } catch (error) {
     return { statusCode: 500, body: `❌ Error: ${error.message}` };
   }
 };
-
-
-
-
