@@ -102,15 +102,15 @@ picture {
 /* fonts */
 @font-face {
   font-family: decoType;
-  src: url("./fonts/decoType.ttf");
+  src: url("../fonts/decotype.ttf");
 }
 @font-face {
   font-family: BenSenHandwriting;
-  src: url("./fonts/BenSenHandwriting.ttf");
+  src: url("../fonts/BenSenHandwriting.ttf");
 }
 @font-face {
   font-family: SolaimanLipi;
-  src: url("./fonts/SolaimanLipi.ttf");
+  src: url("../fonts/SolaimanLipi.ttf");
 }
 
 .robotoFont {
@@ -125,7 +125,7 @@ picture {
 body {
   font: 500 var(--fs-300) / 1.5 sans-serif;
   overflow-x: hidden;
-  background-image: url(./img/bgPattern.jpg);
+  background-image: url(../img/bgPattern.jpg);
   background-color: var(--clr-light);
   background-repeat: repeat-y;
   background-size: 100%;
@@ -367,6 +367,11 @@ span:active,
 .tools > *:active {
   transform: initial !important;
 }
+
+.quoteEditor.action {
+  background-color: crimson !important;
+}
+
 /* editor */
 .editor {
   background-color: var(--clr-accent);
@@ -562,6 +567,36 @@ span:active,
   text-shadow: initial;
   padding: var(--size-500);
   display: none;
+  position: relative;
+}
+
+.profileFormWrapper::after {
+  --singUpAW: 65px;
+  content: "";
+  position: absolute;
+  background-color: var(--clr-quote-header);
+  width: var(--singUpAW);
+  aspect-ratio: 1;
+  background-image: url("data:image/svg+xml,%3Csvg fill='yellowgreen' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3C!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --%3E%3Cpath d='M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3zM504 312l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  clip-path: polygon(6% 0, 100% 0, 0 100%, 0 6%);
+  background-size: 50%;
+  background-position: 5px 5px;
+}
+
+.profileFormWrapper .signUpLink {
+  --singUpAW: 65px;
+  position: absolute;
+  clip-path: polygon(6% 0, 100% 0, 0 100%, 0 6%);
+  opacity: 0;
+  z-index: 1;
+  width: var(--singUpAW);
+  aspect-ratio: 1;
+  background-color: yellowgreen;
+}
+.signUpLink:hover {
+  filter: brightness(120%);
+  opacity: 0.3;
 }
 
 .profileForm {
@@ -734,7 +769,7 @@ input[name="password"] + div {
 
 .quote-wrapper {
   color: var(--clr-quote-text);
-  background-image: url("./img/bg-quote.jpg");
+  background-image: url("../img/bg-quote.jpg");
   background-attachment: fixed;
   background-size: cover;
   background-position-x: center;
@@ -764,7 +799,7 @@ input[name="password"] + div {
 .quote-wrapper .quoteEditorWindow {
   position: absolute;
   left: 50%;
-  top: calc(var(--size-100) * -2);
+  top: 0;
   text-align: center;
   width: 100%;
   z-index: 10;
@@ -795,9 +830,9 @@ input[name="password"] + div {
 @media (min-width: 48em) {
   .quote-wrapper .quoteEditorWindow {
     width: 50%;
-    height: calc(100% + 100px);
+    height: calc(100% + 150px);
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr auto auto 1fr;
+    grid-template-rows: min-content min-content 1fr fit-content auto;
   }
   .quote-wrapper .quoteEditorWindow *:nth-child(1) {
     grid-column: 1 /-1;
@@ -805,7 +840,7 @@ input[name="password"] + div {
   }
   .quote-wrapper .quoteEditorWindow *:nth-child(4) {
     grid-column: 1 /-1;
-    height: 20vh;
+    height: 27vh;
   }
   .quote-wrapper .quoteEditorWindow *:nth-child(5) {
     grid-column: 1 /-1;
@@ -1083,7 +1118,7 @@ input[name="password"] + div {
 }
 
 .process::before {
-  background: url(./img/down-long.svg);
+  background: url(../img/down-long.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20%;
@@ -1821,4 +1856,23 @@ footer > img {
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+
+/* SignUp style */
+.signUpBody {
+    max-height: 100vh !important;
+}
+
+.signUpWrapper {
+    display: grid;
+     gap: var(--size-400);
+    place-content: center;
+}
+
+.signUpWrapper div {
+    display: flex;
+    gap: var(--size-400);
+}
+.signUpWrapper div *{
+    flex: 1;
 }
