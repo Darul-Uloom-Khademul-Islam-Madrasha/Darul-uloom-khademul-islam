@@ -1,7 +1,7 @@
 // GET from local repo's data.json file on window.load
 
 window.onload = () => {
-  fetch("../data.json")
+  fetch("./data.json")
     .then((res) => res.json())
     .then((data) => {
       for (let i = 0; Object.entries(data).length > i; i++) {
