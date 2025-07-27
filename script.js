@@ -1,3 +1,22 @@
+// GET from local repo's data.json file on window.load
+
+window.onload = () => {
+  fetch("../data.json")
+    .then((res) => res.json())
+    .then((data) => {
+      for (let i = 0; Object.entries(data).length > i; i++) {
+        if (Object.entries(data)[i][1].length > 5) {
+          document.querySelector(".quote__header").innerHTML =
+            data.quote__header;
+          document.querySelector(".quote__lead").innerHTML = data.quote__lead;
+          document.querySelector(".quote__text").innerHTML = data.quote__text;
+          document.querySelector(".quote__ref").innerHTML = data.quote__ref;
+        }
+      }
+    })
+    .catch((error) => console.log("Fetch error: ", error));
+};
+
 const theme = document.querySelector("#theme");
 const menuBtn = document.querySelector(".nav h2 svg");
 const menu = document.querySelector(".mainNav");
@@ -274,6 +293,7 @@ function notice(inner, bg, animation) {
 
 function displayToggler() {
   quoteEditorWindow.classList.toggle("d-none");
+  quoteEditor.classList.toggle("action");
 }
 
 // show/hide password
