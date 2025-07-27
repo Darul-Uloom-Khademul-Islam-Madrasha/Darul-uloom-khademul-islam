@@ -102,15 +102,15 @@ picture {
 /* fonts */
 @font-face {
   font-family: decoType;
-  src: url("../fonts/decotype.ttf");
+  src: url("./fonts/decotype.ttf");
 }
 @font-face {
   font-family: BenSenHandwriting;
-  src: url("../fonts/BenSenHandwriting.ttf");
+  src: url("./fonts/BenSenHandwriting.ttf");
 }
 @font-face {
   font-family: SolaimanLipi;
-  src: url("../fonts/SolaimanLipi.ttf");
+  src: url("./fonts/SolaimanLipi.ttf");
 }
 
 .robotoFont {
@@ -125,7 +125,7 @@ picture {
 body {
   font: 500 var(--fs-300) / 1.5 sans-serif;
   overflow-x: hidden;
-  background-image: url(../img/bgPattern.jpg);
+  background-image: url(./img/bgPattern.jpg);
   background-color: var(--clr-light);
   background-repeat: repeat-y;
   background-size: 100%;
@@ -769,7 +769,7 @@ input[name="password"] + div {
 
 .quote-wrapper {
   color: var(--clr-quote-text);
-  background-image: url("../img/bg-quote.jpg");
+  background-image: url("./img/bg-quote.jpg");
   background-attachment: fixed;
   background-size: cover;
   background-position-x: center;
@@ -1118,7 +1118,7 @@ input[name="password"] + div {
 }
 
 .process::before {
-  background: url(../img/down-long.svg);
+  background: url(./img/down-long.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20%;
@@ -1856,23 +1856,4 @@ footer > img {
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
-}
-
-/* SignUp style */
-.signUpBody {
-    max-height: 100vh !important;
-}
-
-.signUpWrapper {
-    display: grid;
-     gap: var(--size-400);
-    place-content: center;
-}
-
-.signUpWrapper div {
-    display: flex;
-    gap: var(--size-400);
-}
-.signUpWrapper div *{
-    flex: 1;
 }
