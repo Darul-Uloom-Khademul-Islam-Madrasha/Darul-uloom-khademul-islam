@@ -197,32 +197,32 @@ const profiles = {
   password: ["dukim1969", "password123", "password456"],
 };
 
-submitBtn.addEventListener("click", (e) => {
-  e.preventDefault();
+// submitBtn.addEventListener("click", (e) => {
+//   e.preventDefault();
 
-  if (inputEmail.value === "" || inputPass.value === "") {
-    inputEmail.style.outline = "3px solid crimson";
-    inputPass.style.outline = "3px solid crimson";
-    inputEmail.style.animation = "warning 1s ease-out infinite";
-    inputPass.style.animation = "warning 1s ease-out infinite";
+//   if (inputEmail.value === "" || inputPass.value === "") {
+//     inputEmail.style.outline = "3px solid crimson";
+//     inputPass.style.outline = "3px solid crimson";
+//     inputEmail.style.animation = "warning 1s ease-out infinite";
+//     inputPass.style.animation = "warning 1s ease-out infinite";
 
-    setTimeout(() => {
-      inputEmail.style.outline = "";
-      inputPass.style.outline = "";
-      inputEmail.style.animation = "";
-      inputPass.style.animation = "";
-    }, 1000);
-  } else if (
-    profiles.email.includes(inputEmail.value) &&
-    profiles.password.includes(inputPass.value) &&
-    profiles.email.indexOf(inputEmail.value) ===
-      profiles.password.indexOf(inputPass.value)
-  ) {
-    signIn();
-  } else {
-    invaildUser();
-  }
-});
+//     setTimeout(() => {
+//       inputEmail.style.outline = "";
+//       inputPass.style.outline = "";
+//       inputEmail.style.animation = "";
+//       inputPass.style.animation = "";
+//     }, 1000);
+//   } else if (
+//     profiles.email.includes(inputEmail.value) &&
+//     profiles.password.includes(inputPass.value) &&
+//     profiles.email.indexOf(inputEmail.value) ===
+//       profiles.password.indexOf(inputPass.value)
+//   ) {
+//     signIn();
+//   } else {
+//     invaildUser();
+//   }
+// });
 
 function signIn() {
   notice(0, "rgba(68, 167, 68, 1)", "fadeIn 500ms linear");
