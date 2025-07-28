@@ -30,13 +30,14 @@ document.getElementById("signUp").addEventListener("submit", async function (e) 
     const data = await res.json();
 
     if (res.ok) {
-      alert("✅ Registration successful, welcome " + data.name);
+      alert("✅ Registration successful!");
       document.getElementById("signUp").reset();
     } else {
-      alert("❌ Registration failed: " + data.message);
+      alert("❌ Registration failed!");
     }
   } catch (error) {
     console.error("Registration Error:", error);
     alert("❌ Something went wrong!");
   }
+  
 });
