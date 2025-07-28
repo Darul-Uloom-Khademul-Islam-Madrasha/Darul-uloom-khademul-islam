@@ -30,20 +30,21 @@ select {
   color: var(--clr-light-sec);
 }
 
-input:focus:not([type="checkbox"]) {
+input:focus:not([type="checkbox"]),
+textarea:focus {
   background-color: var(--clr-white-50);
   outline: 3px solid var(--clr-light-sec);
+  color: var(--clr-quote-text);
 }
 
-button,
-select {
-  outline: 0;
-  border: 0;
+textarea {
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 ul {
   list-style-type: none;
-  margin: 0;
 }
 
 a {
@@ -666,7 +667,25 @@ input[name="password"] + div {
 
 .profileForm__saveToLocal {
   display: flex;
-  justify-content: space-evenly;
+  gap: var(--size-400);
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileForm__saveToLocal *,
+.profileForm__btns * {
+  font-size: var(--size-400);
+}
+
+.profileForm__btns * {
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.profileForm__saveToLocal .btnOnCheckboxWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @media (max-width: 48em) {
@@ -683,21 +702,6 @@ input[name="password"] + div {
     margin-bottom: -20px;
     margin-top: var(--size-100);
   }
-  .profileForm__saveToLocal {
-    display: flex;
-    gap: var(--size-100);
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .profileForm__saveToLocal *,
-  .profileForm__btns * {
-    font-size: var(--size-400);
-  }
-
-  .profileForm__btns * {
-    width: 100%;
-  }
 }
 
 @media (min-width: 48em) and (max-width: 64em) {
@@ -706,7 +710,6 @@ input[name="password"] + div {
     gap: var(--size-100);
     flex-direction: column;
     align-items: center;
-    margin-bottom: -20px;
   }
 
   .nav h2 {
@@ -736,6 +739,98 @@ input[name="password"] + div {
   100% {
     outline-color: rgba(220, 20, 60, 1);
   }
+}
+
+/* Local storage saving check box */
+
+.btnOnCheckbox {
+  position: relative;
+  width: 74px;
+  height: 36px;
+  left: 0;
+  overflow: hidden;
+  border-radius: var(--radius-normal);
+}
+.btnOnCheckboxToggler,
+.btnOnCheckboxLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.checkbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.btnOnCheckboxToggler {
+  z-index: 2;
+}
+
+.btnOnCheckboxLayer {
+  width: 100%;
+  background: #fcebeb;
+
+  filter: var(--clr-light);
+  transition: all ease 0.3s;
+  z-index: 1;
+}
+
+.btnOnCheckboxToggler::before,
+.btnOnCheckboxToggler::after,
+.btnOnCheckboxToggler span {
+  position: absolute;
+  margin: 4px 0;
+  width: 40%;
+  left: 40px;
+  height: 28px;
+  font-size: var(--size-100);
+  font-weight: bold;
+  transition: all ease 0.3s;
+  border-radius: var(--radius-normal);
+  display: grid;
+  place-items: center;
+}
+
+.btnOnCheckboxToggler::before {
+  content: "";
+  left: 4px;
+  background: #f44336;
+}
+
+.btnOnCheckboxToggler::after {
+  content: "YES";
+  right: 4px;
+  color: #4e4e4e;
+}
+
+.btnOnCheckboxToggler span {
+  color: #fff;
+  z-index: 1;
+  left: 8px;
+}
+
+.checkbox:checked + .btnOnCheckboxToggler span {
+  color: #4e4e4e;
+}
+
+.checkbox:checked + .btnOnCheckboxToggler::before {
+  left: 40px;
+
+  background: var(--clr-quote-header);
+}
+
+.checkbox:checked + .btnOnCheckboxToggler::after {
+  color: #fff;
+}
+
+.checkbox:checked ~ .btnOnCheckboxLayer {
+  background-color: var(--clr-white-50);
 }
 
 /* main nav */
@@ -780,7 +875,6 @@ input[name="password"] + div {
 .quote-wrapper div,
 .quote-wrapper form {
   background-color: rgb(0, 0, 0, 0.7);
-  min-height: 300px;
   border-radius: var(--radius-normal);
 }
 .quote-wrapper .quoteEditor {
@@ -794,6 +888,7 @@ input[name="password"] + div {
   z-index: 10;
   display: none;
   place-content: center;
+  cursor: pointer;
 }
 
 .quote-wrapper .quoteEditorWindow {
@@ -808,6 +903,7 @@ input[name="password"] + div {
   gap: var(--size-100);
   padding: var(--size-100);
   box-shadow: 0 2px 5px 0 var(--clr-light-sec);
+  background-color: rgb(0, 0, 0, 0.7);
 }
 
 .quote-wrapper .quoteEditorWindow * {
@@ -830,7 +926,6 @@ input[name="password"] + div {
 @media (min-width: 48em) {
   .quote-wrapper .quoteEditorWindow {
     width: 50%;
-    height: calc(100% + 150px);
     grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content min-content 1fr fit-content auto;
   }
@@ -1651,6 +1746,102 @@ footer > img {
     left: 0;
     right: 50%;
   }
+}
+
+/* REGISTRATION PAGE */
+.title.onReg {
+  height: 10vh;
+  justify-content: space-evenly;
+}
+
+.container.onReg {
+  background-color: var(--clr-light-sec);
+  color: var(--clr-quote-text);
+  margin-top: initial;
+  text-align: center;
+  font-size: var(--size-400);
+  font-family: "Roboto", sans-serif;
+  border-radius: 0;
+}
+.signUpWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-content: center;
+  width: 45vw;
+  max-width: 520px;
+  margin-inline: auto;
+  padding: calc(var(--size-400) * 2);
+  margin-block: calc(var(--size-400) * 3);
+  border-radius: var(--radius-normal);
+  gap: var(--size-500);
+  box-shadow: 0 5px 50px 5px var(--clr-light-50);
+  outline: solid 2px var(--clr-light-sec);
+}
+
+.signUpWrapper div {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.signUpWrapper :nth-child(5) > fieldset {
+  padding: var(--size-100);
+  resize: none;
+  border-radius: var(--radius-normal);
+}
+
+.signUpWrapper :nth-child(5) textarea {
+  resize: none;
+  padding: var(--size-100);
+  height: 150px;
+}
+
+.logo.onReg {
+  width: 8vh;
+}
+
+@media (max-width: 64em) {
+  .signUpWrapper {
+    width: 90vw;
+  }
+}
+@media (max-width: 48rem) {
+  .title.onReg {
+    height: 10vh;
+  }
+  .logo.onReg {
+    width: 100%;
+  }
+  .signUpWrapper div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--size-100);
+    gap: var(--size-100);
+  }
+  .signUpWrapper div * {
+    width: 100%;
+  }
+}
+.signUpWrapper :nth-child(6) {
+  display: inline-flex;
+  flex-direction: row !important;
+  justify-content: center;
+  gap: var(--size-100);
+  width: 50%;
+  margin-inline: auto;
+}
+
+
+button.onReg {
+  background-color: var(--clr-quote-header);
+  color: var(--clr-quote-text);
+}
+
+.footer.onReg {
+  margin-top: initial;
 }
 
 /* Carousel from bootstrap */
