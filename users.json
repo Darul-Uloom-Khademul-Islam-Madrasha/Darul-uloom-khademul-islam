@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "name": "u;l",
+    "email": "abc@gmail.com",
+    "password": "123",
+    "role": "Student",
+    "opinion": ",yh"
+  },
+  {
+    "name": "Md Alamin",
+    "email": "abc@gmail.com",
+    "password": "123",
+    "role": "Student",
+    "opinion": ""
+  }
+]
