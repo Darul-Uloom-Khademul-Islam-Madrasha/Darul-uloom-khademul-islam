@@ -117,15 +117,23 @@
                 </div>
               </div>
               <div class="profileForm__saveToLocal">
-                <div>
-                  <input type="checkbox" name="" id="" />
-                  <p><a class="robotoFont" href="">Remember Me</a></p>
+                <div class="btnOnCheckboxWrapper">
+                  <div class="btnOnCheckbox btn">
+                    <input type="checkbox" name="" class="checkbox" />
+                    <div class="btnOnCheckboxToggler">
+                      <span>&nbsp;NO</span>
+                    </div>
+                    <div class="btnOnCheckboxLayer"></div>
+                  </div>
+                  <div class="robotoFont">Save Login Info</div>
                 </div>
-                <p><a class="robotoFont" href="">Forget Password ?</a></p>
-              </div>
-              <div class="profileForm__btns">
-                <button class="btn" type="submit">Submit</button>
-                <button class="btn" type="reset">Reset</button>
+                <dir>
+                  <p><a class="robotoFont" href="">Forget Password ?</a></p>
+                </dir>
+                <div class="profileForm__btns">
+                  <button class="btn" type="submit">Submit</button>
+                  <button class="btn" type="reset">Reset</button>
+                </div>
               </div>
             </form>
           </div>
@@ -339,8 +347,20 @@
       <div id="quote" class="container px-body quote-wrapper" data-quote>
         <form id="jsonForm" class="quoteEditorWindow d-none">
           <h3>All Fields Are Required</h3>
-          <input type="text" name="quote__header" id="quote__header" placeholder="Enter Header" required/>
-          <input type="text" name="quote__lead" id="quote__lead" placeholder="Enter Lead" required/>
+          <input
+            type="text"
+            name="quote__header"
+            id="quote__header"
+            placeholder="Enter Header"
+            required
+          />
+          <input
+            type="text"
+            name="quote__lead"
+            id="quote__lead"
+            placeholder="Enter Lead"
+            required
+          />
           <textarea
             style="resize: none"
             name="quote__text"
@@ -348,7 +368,13 @@
             placeholder="Enter Quote"
             required
           ></textarea>
-          <input type="text" name="quote__ref" id="quote__ref" placeholder="Enter Reference" required/>
+          <input
+            type="text"
+            name="quote__ref"
+            id="quote__ref"
+            placeholder="Enter Reference"
+            required
+          />
           <button type="submit" class="btn">POST</button>
           <button type="reset" class="btn">RESET</button>
         </form>
