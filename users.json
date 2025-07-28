@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "name": "u;l",
+    "email": "abc@gmail.com",
+    "password": "123",
+    "role": "Student",
+    "opinion": ",yh"
+  }
+]
