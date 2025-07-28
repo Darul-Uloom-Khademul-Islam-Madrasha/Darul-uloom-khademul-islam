@@ -63,28 +63,28 @@
       <div class="signUpWrapper">
         <div>
           <label for="">Enter Your Email:</label>
-          <input type="text" placeholder="abc@example.com" />
+          <input id="regEmail" type="text" placeholder="abc@example.com" />
         </div>
         <div>
           <label for="">Enter Your Password:</label>
-          <input type="text" placeholder="@#abcd1234" />
+          <input id="regPassword" type="text" placeholder="@#abcd1234" />
         </div>
         <div>
           <label for="">Re-enter The Password:</label>
-          <input type="text" placeholder="@#abcd1234" />
+          <input id="regRePassword" type="text" placeholder="@#abcd1234" />
         </div>
         <div>
-          <label for="">Describe Yourself:</label>
-          <select>
-            <option value="">Student</option>
-            <option value="">Teacher</option>
-            <option value="">Other</option>
+          <label for="describe">Describe Yourself:</label>
+          <select name="role" id="describe" required>
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <dir>
           <fieldset>
             <legend>Write Your Opinion:</legend>
-            <textarea name="" id=""></textarea>
+            <textarea name="opinion" id="opinion"></textarea>
           </fieldset>
         </dir>
 
