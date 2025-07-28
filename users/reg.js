@@ -1,34 +1,42 @@
-// USER REGISTRATION
-
-const form = document.getElementById("signUp");
-
-form.addEventListener("submit", async (e) => {
+document.getElementById("signUp").addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  const data = {
-    email: document.getElementById("regEmail").value,
-    password: document.getElementById("regPassword").value,
-    repassword: document.getElementById("regRePassword").value,
-    role: document.getElementById("describe").value,
-    opinion: document.getElementById("opinion").value,
-  };
+  const name = document.getElementById("regName").value.trim();
+  const email = document.getElementById("regEmail").value.trim();
+  const password = document.getElementById("regPassword").value.trim();
+  const rePassword = document.getElementById("regRePassword").value.trim();
+  const role = document.getElementById("describe").value;
+  const opinion = document.getElementById("opinion").value.trim();
 
-  if (data.password !== data.repassword) {
-    alert("Passwords do not match!");
+  if (!name || !email || !password || !rePassword) {
+    alert("❌ Please fill in all required fields.");
     return;
   }
 
+  if (password !== rePassword) {
+    alert("❌ Passwords do not match!");
+    return;
+  }
+
+  const userData = { name, email, password, role, opinion };
+
   try {
-    const response = await fetch("/.netlify/functions/saveUser", {
+    const res = await fetch("/.netlify/functions/registerUser", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(userData),
     });
 
-    const result = await response.json();
-    alert(result.message);
-  } catch (err) {
-    alert("Error saving user!");
-    console.error(err);
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("✅ Registration successful, welcome " + data.name);
+      document.getElementById("signUp").reset();
+    } else {
+      alert("❌ Registration failed: " + data.message);
+    }
+  } catch (error) {
+    console.error("Registration Error:", error);
+    alert("❌ Something went wrong!");
   }
 });
