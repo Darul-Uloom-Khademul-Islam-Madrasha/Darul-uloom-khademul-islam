@@ -26,5 +26,12 @@
     "password": "12345678",
     "role": "Teacher",
     "opinion": "I am a madrasha teacher."
+  },
+  {
+    "name": "Md Abdur Rahim",
+    "email": "abdurrahim123@gmail.com",
+    "password": "pass12345",
+    "role": "Student",
+    "opinion": ""
   }
 ]
