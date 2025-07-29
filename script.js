@@ -178,17 +178,16 @@ profileSVG.addEventListener("click", () => {
 });
 
 // on Submitting a profile
-const editorLogger = document.querySelector(".editor p span");
+const editorPara = document.querySelector(".editor p");
 const editor = document.querySelector(".editor");
 const editorLog = document.querySelector(".editor div");
 const signOutPrompt = document.querySelector(".signOutPrompt");
 const profileForm = document.querySelector("#profileForm");
-const inputEmail = document.querySelector('input[type="email"]');
-const inputPass = document.querySelector('input[name="password"]');
+const emailInput = document.querySelector('input[type="email"]');
+const passInput = document.querySelector('input[name="password"]');
 const profileNotice = document.querySelector(".profileNotice");
 const quoteEditor = document.querySelector(".quoteEditor");
 const quoteEditorWindow = document.querySelector(".quoteEditorWindow");
-
 
 profileForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -199,24 +198,26 @@ profileForm.addEventListener("submit", (e) => {
       const inputEmail = document.querySelector('input[type="email"]').value;
       const inputPass = document.querySelector('input[name="password"]').value;
       users.forEach((v, i) => {
+        
         if (!inputEmail || !inputPass) {
-          inputEmail.style.outline = "3px solid crimson";
-          inputPass.style.outline = "3px solid crimson";
-          inputEmail.style.animation = "warning 1s ease-out infinite";
-          inputPass.style.animation = "warning 1s ease-out infinite";
+          emailInput.style.outline = "3px solid crimson";
+          passInput.style.outline = "3px solid crimson";
+          emailInput.style.animation = "warning 1s ease-out infinite";
+          passInput.style.animation = "warning 1s ease-out infinite";
 
           setTimeout(() => {
-            inputEmail.style.outline = "";
-            inputPass.style.outline = "";
-            inputEmail.style.animation = "";
-            inputPass.style.animation = "";
+            emailInput.style.outline = "";
+            passInput.style.outline = "";
+            emailInput.style.animation = "";
+            passInput.style.animation = "";
           }, 1000);
         } else if (
           users[i].email === inputEmail &&
           users[i].password === inputPass &&
           users[i] === users[i]
         ) {
-          signIn();
+          signIn((users[i].name), (users[i].role));
+
         } else {
           invaildUser();
         }
@@ -224,12 +225,12 @@ profileForm.addEventListener("submit", (e) => {
     });
 });
 
-function signIn() {
+function signIn(name, role) {
   notice(0, "rgba(68, 167, 68, 1)", "fadeIn 500ms linear");
   displayTrue(profileNotice);
   quoteEditor.style.display = "grid";
   editor.style.display = "flex";
-  editorLogger.innerHTML = `- ${inputEmail.value}`;
+  editorPara.innerHTML = name + " - " + role;
   profileSVG.classList.add("remove-pointer");
   setTimeout(() => {
     displayFalse(profileNotice, profileFormWrapper);

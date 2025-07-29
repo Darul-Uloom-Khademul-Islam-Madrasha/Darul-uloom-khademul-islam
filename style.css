@@ -386,11 +386,6 @@ span:active,
   align-items: center;
 }
 
-.editor p span {
-  font-weight: 300;
-  font-family: "Roboto" sans-serif;
-}
-
 .editor div {
   display: grid;
   grid-auto-flow: column;
@@ -402,9 +397,12 @@ span:active,
   margin-top: 5px;
 }
 
-.editor div svg {
+.editor svg {
   width: var(--size-500);
+  align-self: center;
+  margin-top: 2px;
 }
+
 
 .editor div {
   position: relative;
@@ -928,7 +926,7 @@ input[name="password"] + div {
 
 @media (min-width: 48em) {
   .quote-wrapper .quoteEditorWindow {
-    width: 50%;
+    width: 40%;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content min-content 1fr fit-content auto;
   }
