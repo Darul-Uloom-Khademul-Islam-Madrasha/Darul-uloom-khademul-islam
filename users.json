@@ -12,5 +12,12 @@
     "password": "123",
     "role": "Student",
     "opinion": ""
+  },
+  {
+    "name": "glof;",
+    "email": "f;yfyl",
+    "password": "456",
+    "role": "Student",
+    "opinion": ""
   }
 ]
