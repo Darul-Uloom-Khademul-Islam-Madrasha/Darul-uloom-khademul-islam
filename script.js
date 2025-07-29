@@ -182,47 +182,47 @@ const editorLogger = document.querySelector(".editor p span");
 const editor = document.querySelector(".editor");
 const editorLog = document.querySelector(".editor div");
 const signOutPrompt = document.querySelector(".signOutPrompt");
-const submitBtn = document.querySelector('.btn[type="submit"]');
+const profileForm = document.querySelector("#profileForm");
 const inputEmail = document.querySelector('input[type="email"]');
 const inputPass = document.querySelector('input[name="password"]');
 const profileNotice = document.querySelector(".profileNotice");
 const quoteEditor = document.querySelector(".quoteEditor");
 const quoteEditorWindow = document.querySelector(".quoteEditorWindow");
-const profiles = {
-  email: [
-    "khadimulislammadrasa5.com",
-    "alaminkhan00710@gmail.com",
-    "code.islah@gmail.com",
-  ],
-  password: ["dukim1969", "password123", "password456"],
-};
 
-// submitBtn.addEventListener("click", (e) => {
-//   e.preventDefault();
 
-//   if (inputEmail.value === "" || inputPass.value === "") {
-//     inputEmail.style.outline = "3px solid crimson";
-//     inputPass.style.outline = "3px solid crimson";
-//     inputEmail.style.animation = "warning 1s ease-out infinite";
-//     inputPass.style.animation = "warning 1s ease-out infinite";
+profileForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-//     setTimeout(() => {
-//       inputEmail.style.outline = "";
-//       inputPass.style.outline = "";
-//       inputEmail.style.animation = "";
-//       inputPass.style.animation = "";
-//     }, 1000);
-//   } else if (
-//     profiles.email.includes(inputEmail.value) &&
-//     profiles.password.includes(inputPass.value) &&
-//     profiles.email.indexOf(inputEmail.value) ===
-//       profiles.password.indexOf(inputPass.value)
-//   ) {
-//     signIn();
-//   } else {
-//     invaildUser();
-//   }
-// });
+  fetch("./users.json")
+    .then((data) => data.json())
+    .then((users) => {
+      const inputEmail = document.querySelector('input[type="email"]').value;
+      const inputPass = document.querySelector('input[name="password"]').value;
+      users.forEach((v, i) => {
+        if (!inputEmail || !inputPass) {
+          inputEmail.style.outline = "3px solid crimson";
+          inputPass.style.outline = "3px solid crimson";
+          inputEmail.style.animation = "warning 1s ease-out infinite";
+          inputPass.style.animation = "warning 1s ease-out infinite";
+
+          setTimeout(() => {
+            inputEmail.style.outline = "";
+            inputPass.style.outline = "";
+            inputEmail.style.animation = "";
+            inputPass.style.animation = "";
+          }, 1000);
+        } else if (
+          users[i].email === inputEmail &&
+          users[i].password === inputPass &&
+          users[i] === users[i]
+        ) {
+          signIn();
+        } else {
+          invaildUser();
+        }
+      });
+    });
+});
 
 function signIn() {
   notice(0, "rgba(68, 167, 68, 1)", "fadeIn 500ms linear");
@@ -346,6 +346,3 @@ document.getElementById("jsonForm").addEventListener("submit", async (e) => {
   });
   alert(await response.text());
 });
-
-
-
