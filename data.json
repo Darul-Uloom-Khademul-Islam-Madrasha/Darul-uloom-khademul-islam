@@ -1,6 +1,6 @@
 {
-  "quote__header": "gh",
-  "quote__lead": "uj",
-  "quote__text": "llll",
-  "quote__ref": "u"
+  "quote__header": "My header",
+  "quote__lead": "My text lead",
+  "quote__text": "Anything here",
+  "quote__ref": "My reference"
 }
