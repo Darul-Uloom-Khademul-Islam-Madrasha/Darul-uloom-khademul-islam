@@ -18,8 +18,8 @@ exports.handler = async (event) => {
   }
 
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-  const GITHUB_REPO = process.env.GITHUB_REPO; // e.g., "your-username/Darul-uloom-khademul-islam"
-  const GITHUB_FILE_PATH = process.env.GITHUB_FILE_PATH || "users.json";
+  const GITHUB_REPO = "Darul-Uloom-Khademul-Islam-Madrasha/Darul-uloom-khademul-islam"; // e.g., "your-username/Darul-uloom-khademul-islam"
+  const GITHUB_FILE_PATH = "users.json";
 
   try {
     const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;

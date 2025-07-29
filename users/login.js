@@ -2,11 +2,11 @@
 
 document.getElementById("profileForm").addEventListener("submit", async function (e) {
   e.preventDefault();
-  console.log(200);
   
 
   const email = document.getElementById("loginEmail").value.trim();
   const password = document.getElementById("loginPassword").value.trim();
+  
 
   try {
     const res = await fetch("/.netlify/functions/loginUser", {
