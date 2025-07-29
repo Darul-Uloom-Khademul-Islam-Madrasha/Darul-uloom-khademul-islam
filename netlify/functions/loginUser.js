@@ -18,15 +18,15 @@ exports.handler = async (event) => {
   }
 
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-  const GITHUB_REPO = "Darul-Uloom-Khademul-Islam-Madrasha/Darul-uloom-khademul-islam"; // e.g., "your-username/Darul-uloom-khademul-islam"
+  const GITHUB_REPO = "Darul-Uloom-Khademul-Islam-Madrasha/Darul-uloom-khademul-islam";
   const GITHUB_FILE_PATH = "users.json";
 
   try {
     const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
+
     const res = await fetch(apiUrl, {
       headers: {
         Authorization: `Bearer ${GITHUB_TOKEN}`,
-        Accept: "application/vnd.github.v3.raw",
       },
     });
 
@@ -34,7 +34,9 @@ exports.handler = async (event) => {
       throw new Error("❌ Failed to fetch users.json from GitHub.");
     }
 
-    const users = await res.json();
+    const file = await res.json();
+    const content = Buffer.from(file.content, "base64").toString("utf-8");
+    const users = JSON.parse(content);
 
     const foundUser = users.find(
       (user) => user.email === email && user.password === password
