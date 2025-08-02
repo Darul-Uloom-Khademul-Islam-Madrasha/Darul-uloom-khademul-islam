@@ -33,5 +33,12 @@
     "password": "pass12345",
     "role": "Student",
     "opinion": ""
+  },
+  {
+    "name": "Yusuf",
+    "email": "yusufbinalamin88@gmail.com",
+    "password": "Dkm1969fc",
+    "role": "Teacher",
+    "opinion": ""
   }
 ]
