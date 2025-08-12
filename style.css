@@ -42,8 +42,7 @@ textarea {
   width: 100%;
 }
 textarea:focus {
-    color: var(--clr-quote-text);
-
+  color: var(--clr-quote-text);
 }
 
 ul {
@@ -217,6 +216,9 @@ p {
 .d-none {
   display: none !important;
 }
+.d-block {
+  display: block !important;
+}
 
 .lead {
   font-weight: var(--fw-300);
@@ -277,12 +279,45 @@ svg:hover {
 
 .mainNav li:hover {
   color: var(--clr-text-sec);
-  filter: brightness(120%);
+  filter: brightness(110%);
   background-color: var(--clr-light-50);
-  cursor: pointer;
-  user-select: none;
 }
 
+.mainNav li {
+  position: relative;
+  overflow: hidden;
+  transition: background 600ms;
+  color: #fff;
+  padding: 1rem 2rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  outline: 0;
+  border: 0;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3); /* black with 30% opacity */
+  cursor: pointer;
+}
+
+span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 600ms linear;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+
+
+.dropdown span:hover {
+  background-color: var(--clr-quote-header);
+  color: var(--clr-white);
+}
 .notice__sort span:hover,
 .notice__year span:hover,
 .notice__list .list:hover {
@@ -352,6 +387,7 @@ svg:hover,
 .output p:hover,
 .links a:hover,
 a:hover,
+.dropdown span,
 .quote-wrapper .quoteEditor:hover {
   transition: all 100ms linear;
 }
@@ -403,7 +439,6 @@ span:active,
   margin-top: 2px;
 }
 
-
 .editor div {
   position: relative;
 }
@@ -430,6 +465,26 @@ span:active,
   border-radius: var(--radius-normal);
   right: var(--size-100);
   display: none;
+}
+
+/* dropdowns */
+.dropdown span {
+  display: block;
+  background: var(--clr-white-50);
+  padding: var(--size-100);
+  border-radius: var(--radius-normal);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown {
+  height: 0 ;
+  overflow: hidden;
+display: none;
+}
+
+.expand {
+  height: 100%;
+  display: block;
 }
 
 /* title */
@@ -839,18 +894,31 @@ input[name="password"] + div {
   display: none;
 }
 
-.nav *:first-child {
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: space-between;
-}
-
 .nav svg {
   width: calc(var(--size-100) * 2.5);
   fill: var(--clr-accent);
 }
 
-.mainNav > * {
+.nav h2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainNav li {
+  position: relative;
+}
+
+.mainNav li::after {
+  content: "";
+  margin-right: var(--size-200);
+  display: inline-block;
+  margin-left: var(--size-200);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #444 transparent transparent transparent;
+}
+
+.mainNav > li {
   padding: calc(var(--size-100) - 5px);
   text-indent: var(--size-100);
   border-radius: var(--radius-normal);
@@ -1641,6 +1709,11 @@ input[name="password"] + div {
     grid-template-rows: 1fr;
     gap: 20px;
     align-content: center;
+  }
+
+  .dropdown[data-visibleOnMedia="true"] {
+    height: 100%;
+    display: block;
   }
 
   .mergeNav .carousel,
