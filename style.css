@@ -542,12 +542,6 @@ span:active,
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-/* logo */
-.logo img {
-  width: 25%;
-  height: auto;
-  margin: 0 auto;
-}
 
 /* arabic header */
 
