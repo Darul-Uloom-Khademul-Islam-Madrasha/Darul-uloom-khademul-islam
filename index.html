@@ -12,6 +12,10 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <title>Darul Uloom Khademul Islam Madrasha</title>
   </head>
 
@@ -87,7 +91,7 @@
       <div class="title__header">
         <p class="arabicHeader">دار العلوم خادم الاسلام مدرسة، صوادنغا</p>
         <p>দারুল উলূম খাদেমুল ইসলাম মাদরাসা, চুয়াডাঙ্গা।</p>
-        <p>Darul Uloom Khademul Islam Madrasha, Chuadanga</p>
+        <p class="title__en">Darul Uloom Khademul Islam Madrasha, Chuadanga</p>
       </div>
       <div class="tools">
         <span class="profile">
@@ -105,26 +109,24 @@
 
           <div class="profileFormWrapper">
             <a class="signUpLink" href="./signUp.html"></a>
-            <h3 class="profileForm__header">Log In Your Profile</h3>
+            <h4 class="profileForm__header">লগইন করুন</h4>
             <form class="profileForm robotoFont" id="profileForm">
               <div class="profileForm__inputs">
                 <div>
-                  <label for="">Email :</label>
                   <input
                     type="email"
                     name=""
                     id="loginEmail"
-                    placeholder="Enter your email"
+                    placeholder="Email"
                     autocomplete="username"
                   />
                 </div>
                 <div>
-                  <label for="">Password :</label>
                   <input
                     type="password"
                     name="password"
                     id="loginPassword"
-                    placeholder="Enter your password"
+                    placeholder="Password"
                     autocomplete="current-password"
                   />
                   <div onclick="showHide()"></div>
@@ -327,7 +329,7 @@
         <div class="menu-sm">
           <nav class="nav">
             <h2>
-              Menu
+              
               <svg
                 class="rotateSVG"
                 xmlns="http://www.w3.org/2000/svg"
@@ -340,16 +342,20 @@
               </svg>
             </h2>
             <ul class="mainNav animateScroll">
-              <li>শুরু</li>
+              
               <li>
                 পরিচিতি
-                <div class="dropdown" data-visibleOnMedia="true">
+                <div class="dropdown">
                   <span>দারুল উলূম খাদেমুল ইসলাম মাদরাসা</span>
                   <span>যিম্মাদারগণের পরিচিতি</span>
                   <span>আদর্শ ও লক্ষ্য-উদ্দেশ্য</span>
                 </div>
               </li>
-
+<li style="font-weight: 600;">
+  <a href="result.html">
+পরীক্ষার ফলাফল
+  </a>
+  </li>
               <li>
                 বিভাগসমূহ
                 <div class="dropdown">
@@ -451,37 +457,129 @@
 
       <!-- Notices -->
       <div class="container notices px-body">
-        <div class="notice__sort animateScroll">
-          <h2>Class</h2>
-          <span>All</span>
-          <span>Jamat e Mizan</span>
-          <span>NahubeMir</span>
-          <span>Kafiya</span>
-          <span>Jalalyin</span>
-          <span>Mishkat</span>
-          <span>Jamat Takmil / Dawra Hadith</span>
+        <div class="noticeHubIntro animateScroll">
+          <h2>Notice Board</h2>
+          <p>
+            Latest madrasha announcements, exam updates, and important student
+            information in one organized board.
+          </p>
         </div>
-        <div class="notice__year animateScroll">
-          <h2>Year</h2>
-          <span>2020</span>
-          <span>2021</span>
-          <span>2022</span>
-          <span>2023</span>
-          <span>2024</span>
-          <span>2025</span>
-        </div>
-        <div class="notice__list animateScroll">
-          <h2>Notices</h2>
-          <div class="list">Mizan Test Exam 2025</div>
-          <div class="list">Jamat e *** Result 2025</div>
-          <div class="list">Jamat e *** Result 2025</div>
-          <div class="list">Jamat e *** Result 2025</div>
-          <div class="list">Jamat e *** Result 2025</div>
-          <div class="list">Jamat e *** Result 2025</div>
-          <div class="list">Jamat e *** Result 2025</div>
-          <div class="list">Jamat e *** Result 2025</div>
-          <div class="list">Jamat e *** Result 2025</div>
-          <div class="list">Jamat e *** Result 2025</div>
+        <div class="noticeHubMain animateScroll">
+          <div class="noticeFeatured animateScroll">
+            <div class="noticeFeatured__badge">Featured Notice</div>
+            <div class="noticeFeatured__meta">
+              <span>Press Release</span>
+              <span>08 Sep 2025</span>
+            </div>
+            <h3>Mizan Test Exam 2025</h3>
+            <p>
+              Important academic update for current students with latest exam
+              publication and notice board priority visibility.
+            </p>
+            <a class="btn" href="">Read notice</a>
+          </div>
+          <div class="noticeBoard animateScroll">
+            <div class="noticeBoard__head">
+              <h2>Latest Notices</h2>
+              <a href="">View archive</a>
+            </div>
+            <div class="noticeBoard__list">
+              <article class="noticeRow">
+                <div class="noticeRow__date">
+                  <strong>08</strong>
+                  <span>Sep 2025</span>
+                </div>
+                <div class="noticeRow__body">
+                  <div class="noticeRow__meta">
+                    <span>Press Release</span>
+                    <span>Mizan</span>
+                  </div>
+                  <h3>Mizan Test Exam 2025</h3>
+                </div>
+                <a class="noticeRow__action" href="">Open</a>
+              </article>
+              <article class="noticeRow">
+                <div class="noticeRow__date">
+                  <strong>16</strong>
+                  <span>Aug 2025</span>
+                </div>
+                <div class="noticeRow__body">
+                  <div class="noticeRow__meta">
+                    <span>Result</span>
+                    <span>Nahubemir</span>
+                  </div>
+                  <h3>Jamat e *** Result 2025</h3>
+                </div>
+                <a class="noticeRow__action" href="">Open</a>
+              </article>
+              <article class="noticeRow">
+                <div class="noticeRow__date">
+                  <strong>11</strong>
+                  <span>Aug 2025</span>
+                </div>
+                <div class="noticeRow__body">
+                  <div class="noticeRow__meta">
+                    <span>Result</span>
+                    <span>Kafiya</span>
+                  </div>
+                  <h3>Jamat e *** Result 2025</h3>
+                </div>
+                <a class="noticeRow__action" href="">Open</a>
+              </article>
+              <article class="noticeRow">
+                <div class="noticeRow__date">
+                  <strong>15</strong>
+                  <span>Apr 2025</span>
+                </div>
+                <div class="noticeRow__body">
+                  <div class="noticeRow__meta">
+                    <span>Academic</span>
+                    <span>Jalalyin</span>
+                  </div>
+                  <h3>Jamat e *** Result 2025</h3>
+                </div>
+                <a class="noticeRow__action" href="">Open</a>
+              </article>
+              <article class="noticeRow">
+                <div class="noticeRow__date">
+                  <strong>12</strong>
+                  <span>Apr 2025</span>
+                </div>
+                <div class="noticeRow__body">
+                  <div class="noticeRow__meta">
+                    <span>Notice</span>
+                    <span>Mishkat</span>
+                  </div>
+                  <h3>Jamat e *** Result 2025</h3>
+                </div>
+                <a class="noticeRow__action" href="">Open</a>
+              </article>
+              <article class="noticeRow">
+                <div class="noticeRow__date">
+                  <strong>05</strong>
+                  <span>Apr 2025</span>
+                </div>
+                <div class="noticeRow__body">
+                  <div class="noticeRow__meta">
+                    <span>Exam</span>
+                    <span>Takmil</span>
+                  </div>
+                  <h3>Jamat e *** Result 2025</h3>
+                </div>
+                <a class="noticeRow__action" href="">Open</a>
+              </article>
+            </div>
+          </div>
+          <div class="noticeSidebar animateScroll">
+            <h2>Quick Access</h2>
+            <div class="noticeSidebar__group">
+              <span>All Notices</span>
+              <span>Exam Notices</span>
+              <span>Academic Calendar</span>
+              <span>Admission Updates</span>
+              <span>Routine & Forms</span>
+            </div>
+          </div>
         </div>
       </div>
     </header>

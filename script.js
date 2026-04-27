@@ -1,6 +1,7 @@
 // GET from local repo's data.json file on window.load
 
 window.onload = () => {
+  document.body.classList.add("dark-theme");
   fetch("./data.json")
     .then((res) => res.json())
     .then((data) => {
@@ -133,20 +134,49 @@ close.addEventListener("click", () => {
 
 // scroll events
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("animate");
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+const animatedElements = Array.from(document.querySelectorAll(".animateScroll"));
 
-document.querySelectorAll(".animateScroll").forEach((e) => {
-  observer.observe(e);
+animatedElements.forEach((element, index) => {
+  element.style.setProperty("--stagger-index", index % 8);
+});
+
+if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+  animatedElements.forEach((element) => element.classList.add("animate"));
+} else {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  animatedElements.forEach((element) => {
+    observer.observe(element);
+  });
+}
+
+document.querySelectorAll(".title, .mergeNav, .quote-wrapper").forEach((card) => {
+  card.addEventListener("pointermove", (event) => {
+    const bounds = card.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+    const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+
+    card.style.setProperty("--pointer-x", `${x}%`);
+    card.style.setProperty("--pointer-y", `${y}%`);
+  });
+
+  card.addEventListener("pointerleave", () => {
+    card.style.removeProperty("--pointer-x");
+    card.style.removeProperty("--pointer-y");
+  });
 });
 
 // profile page
