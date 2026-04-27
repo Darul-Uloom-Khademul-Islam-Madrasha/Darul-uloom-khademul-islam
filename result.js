@@ -1,4 +1,4 @@
-﻿const sheetUrl = ["res-2023.xlsx", "res-2024.xlsx", "res-2025.xlsx"];
+﻿let sheetUrl = [];
 const optClass = document.querySelector("#class");
 const optYear = document.querySelector("#year");
 const optStds = document.querySelector("#stds");
@@ -11,7 +11,9 @@ const resultStatus = document.querySelector("#resultStatus");
 let fullResultByYear = [];
 let resultPerStd = [];
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadResultsFiles();
+   
   generateYearsFromSheets();
   resetClassSelect();
   resetStudentSelect();
@@ -19,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "ফলাফল দেখার জন্য নির্বাচন সম্পূর্ণ করুন",
     "সাল, শ্রেণী এবং শিক্ষার্থীর নাম নির্বাচন করলে নিচে ফলাফল দেখা যাবে।"
   );
+
+  
 });
 
 function setOptions(select, placeholder, items, valueKey, labelKey) {
@@ -74,7 +78,7 @@ optYear.addEventListener("change", async (e) => {
   );
 
   const url = sheetUrl.find((sheet) => sheet.includes(selectedYear));
-  await fetchAndParseMadrashaExcel(url);
+  await fetchAndParseMadrashaExcel('results/'+url);
 
   if (fullResultByYear.length) {
     setOptions(optClass, "শ্রেণী / মারহালা নির্বাচন করুন", fullResultByYear, "className", "className");
@@ -351,3 +355,18 @@ function printContainer() {
   window.print();
 }
 
+
+
+async function loadResultsFiles() {
+  try {
+    const response = await fetch('/.netlify/functions/resultsList');
+    const data = await response.json();
+    
+    const files = data.files;
+    sheetUrl = files;
+    
+    
+  } catch (error) {
+    console.error('Error loading files:', error);
+  }
+}

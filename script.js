@@ -38,99 +38,10 @@ menuBtn.addEventListener("click", () => {
   }
 });
 
-// on submit
-const submit = document.querySelector(".submit");
-const reset = document.querySelector(".reset");
-const process = document.querySelector(".process");
-const processing = document.querySelector(".processing");
-const skChase = document.querySelector(".skChase");
-const links = {
-  2025: {
-    mizan: "http://web1.app",
-    nahubemir: "http://web2.app",
-    kafiya: "http://web2.app",
-    mishkat: "http://web4.app",
-    jalalyn: "http://web5.app",
-    takmil: "http://web6.app",
-  },
-};
 
-submit.addEventListener("click", () => {
-  skChase.style.display = "block";
-  process.classList.remove("process");
 
-  // text entry
-  const textEntry = document.querySelector(".text-entry");
-  let count = -1;
-  let text = "Please wait...";
-  let temp = "";
 
-  let int = setInterval(() => {
-    count++;
-    if (text.length > count) {
-      temp += text[count];
-    }
-    textEntry.innerHTML = temp;
 
-    if (temp.length === text.length) {
-      clearInterval(int);
-    }
-  }, 100);
-
-  setTimeout(() => {
-    processing.classList.remove("processing");
-    skChase.style.display = "none";
-    textEntry.innerHTML = "";
-  }, 2000);
-  processing.classList.add("processing");
-
-  // selection reference
-  const year = document.querySelector(".year select");
-  const __class = document.querySelector(".class select");
-  const reference = document.querySelector(".reference");
-
-  reference.innerHTML = `* ${__class.value} ${year.value}`;
-
-  // result output
-  const gdrive = document.querySelector(".gdrive");
-  const previewPDF = document.querySelector(".previewPDF");
-
-  for (let key in links) {
-    if (year.value === key) {
-      gdrive.href = links[`${year.value}`][`${__class.value.toLowerCase()}`];
-      gdrive.innerHTML = "Google Drive";
-      gdrive.style.pointerEvents = "auto";
-      previewPDF.style.visibility = "visible";
-      reference.style.color = "#1f8312";
-      gdrive.parentElement.setAttribute("style", "");
-    } else {
-      gdrive.innerHTML = "No data found";
-      gdrive.style.pointerEvents = "none";
-      previewPDF.style.visibility = "hidden";
-      reference.style.color = "crimson";
-      gdrive.parentElement.setAttribute("style", "color: crimson; border: 0");
-    }
-  }
-});
-
-//reset result entry
-reset.addEventListener("click", () => {
-  process.classList.add("process");
-});
-
-// previewPDF
-const previewPDF = document.querySelector(".previewPDF");
-const PDFReader = document.querySelector(".PDFReader");
-const result = document.querySelector("#result");
-const close = document.querySelector(".close");
-
-previewPDF.addEventListener("click", () => {
-  PDFReader.style.display = "block";
-});
-
-close.addEventListener("click", () => {
-  PDFReader.style.display = "none";
-});
 
 // scroll events
 
