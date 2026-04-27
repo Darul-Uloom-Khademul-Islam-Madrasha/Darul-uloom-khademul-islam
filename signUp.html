@@ -63,40 +63,49 @@
     </div>
 
     <form class="container onReg" id="signUp" action="">
+      <div class="signUpIntro">
+        <span class="signUpIntro__badge">Registration</span>
+        <p class="signUpIntro__text">
+          Create a madrasha profile to stay connected with updates, notices, and
+          academic services.
+        </p>
+      </div>
       <h1>Registration Form</h1>
       <div class="signUpWrapper">
-        <div>
-          
+        <div class="inputGroup">
+          <label for="regName">Full Name</label>
           <input id="regName" type="text" placeholder="Name" />
         </div>
-        <div>
-         
+        <div class="inputGroup">
+          <label for="regEmail">Email Address</label>
           <input id="regEmail" type="text" placeholder="Email" />
         </div>
-        <div>
-          
+        <div class="inputGroup">
+          <label for="regPassword">Password</label>
           <input id="regPassword" type="text" placeholder="Password" />
         </div>
-        <div>
-          
+        <div class="inputGroup">
+          <label for="regRePassword">Confirm Password</label>
           <input id="regRePassword" type="text" placeholder="Password" />
         </div>
-        <div>
+        <div class="inputGroup">
           <label for="describe">Describe Yourself:</label>
-          <select name="role" id="describe" required>
-            <option value="Student">Student</option>
-            <option value="Teacher">Teacher</option>
-            <option value="Other">Other</option>
-          </select>
+          <div class="selectField">
+            <select name="role" id="describe" required>
+              <option value="Student">Student</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
         </div>
-        <dir>
+        <dir class="inputGroup inputGroup--full">
           <fieldset>
             <legend>Write Your Opinion:</legend>
             <textarea name="opinion" id="opinion"></textarea>
           </fieldset>
         </dir>
 
-        <div>
+        <div class="formActionRow">
           <button class="onReg" type="submit">SUBMIT</button>
           <button type="reset">RESET</button>
         </div>

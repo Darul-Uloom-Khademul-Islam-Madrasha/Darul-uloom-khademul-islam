@@ -1,273 +1,83 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="bn">
-
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="result.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>মাদরাসার ফলাফল - দারুল উলুম খাদেমুল ইসলাম</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Noto Sans Bengali', Arial, sans-serif;
-            background: #f5f5f5;
-            direction: ltr;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #1a5f2a, #0d3b1a);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-        
-        .header h1 {
-            font-size: 1em;
-            white-space: nowrap;
-        }
-        
-        .search-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-        
-        .search-input {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            border: 2px solid #1a5f2a;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .filter-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        select {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            flex: 1;
-            min-width: 150px;
-        }
-        
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .result-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-        
-        .result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .student-name {
-            font-size: 1.4em;
-            color: #1a5f2a;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        
-        .student-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            color: #666;
-        }
-        
-        .marks-summary {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-around;
-        }
-        
-        .mark-item {
-            text-align: center;
-        }
-        
-        .mark-label {
-            font-size: 0.9em;
-            color: #666;
-        }
-        
-        .mark-value {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #1a5f2a;
-        }
-        
-        .grade-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-        
-        .mumtaz {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .jayyid-jiddan {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-        
-        .jayyid {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .makbul {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-        
-        .modal-content {
-            background: white;
-            margin: 5% auto;
-            padding: 30px;
-            width: 90%;
-            max-width: 800px;
-            border-radius: 10px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .close-btn {
-            float: right;
-            font-size: 28px;
-            cursor: pointer;
-            color: #666;
-        }
-        
-        .marks-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        .marks-table th,
-        .marks-table td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .marks-table th {
-            background: #1a5f2a;
-            color: white;
-        }
-        
-        .print-btn {
-            background: #1a5f2a;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            
-            .modal-content,
-            .modal-content * {
-                visibility: visible;
-            }
-            
-            .modal-content {
-                position: absolute;
-                left: 0;
-                top: 0;
-            }
-            
-            .close-btn,
-            .print-btn {
-                display: none;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>দারুল উলুম খাদেমুল ইসলাম</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="result.css" />
+    <title>মাদরাসার ফলাফল - দারুল উলূম খাদেমুল ইসলাম</title>
+  </head>
+  <body class="resultPage">
+    <div class="resultShell">
+      <header class="resultHero">
+        <div class="resultHero__pattern"></div>
+        <a class="resultHero__brand" href="./index.html" aria-label="Back to home">
+          <img src="./img/logo.png" alt="Darul Uloom Khademul Islam logo" />
+        </a>
+        <div class="resultHero__content">
+          <span class="resultHero__eyebrow">Academic Portal</span>
+          <h1>দারুল উলূম খাদেমুল ইসলাম মাদরাসা</h1>
+          <p>
+            পরীক্ষার ফলাফল দেখুন একটি পরিষ্কার, মার্জিত এবং মোবাইল-সহায়ক
+            ইন্টারফেসে।
+          </p>
         </div>
-        
-        <!-- Search & Filter -->
-        <div class="search-container">
-          <h3>নির্বাচন করূনঃ</h3>  
-            <div class="opt">
-                <select name="" id="year">
-                </select>
-                
-                <select name="" id="class">
-                
-                </select>
-                
-                <select name="" id="stds">
-                
-                </select>
+      </header>
+
+      <section class="resultLookup">
+        <div class="resultLookup__intro">
+          <span class="lookupBadge">Personal Result</span>
+          <h2>ফলাফল অনুসন্ধান</h2>
+          <p>
+            বেফাক ফলাফলের ধাপভিত্তিক নির্বাচন পদ্ধতির মতো আগে সাল, তারপর
+            শ্রেণী, তারপর শিক্ষার্থীর নাম নির্বাচন করুন।
+          </p>
+        </div>
+
+        <div class="resultFilters">
+          <div class="filterField">
+            <label for="year">পরীক্ষার সাল</label>
+            <div class="selectShell">
+              <select id="year"></select>
             </div>
-            
+          </div>
+
+          <div class="filterField">
+            <label for="class">শ্রেণী / মারহালা</label>
+            <div class="selectShell">
+              <select id="class"></select>
+            </div>
+          </div>
+
+          <div class="filterField">
+            <label for="stds">ছাত্র / ছাত্রী</label>
+            <div class="selectShell">
+              <select id="stds"></select>
+            </div>
+          </div>
         </div>
+      </section>
+
+      <section class="resultStatus" id="resultStatus">
+        <div class="resultStatus__card">
+          <h3>ফলাফল দেখার জন্য নির্বাচন সম্পূর্ণ করুন</h3>
+          <p>সাল, শ্রেণী এবং শিক্ষার্থীর নাম নির্বাচন করলে নিচে ফলাফল দেখা যাবে।</p>
+        </div>
+      </section>
+
+      <section class="resultCanvas">
+        <div class="result-container"></div>
+      </section>
     </div>
-    
-    <div class="result-container"></div>
-    
+
     <script src="xlsx.full.min.js"></script>
     <script src="result.js"></script>
-</body>
-
+  </body>
 </html>
