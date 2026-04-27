@@ -1,7 +1,6 @@
 // GET from local repo's data.json file on window.load
 
 window.onload = () => {
-  document.body.classList.add("dark-theme");
   fetch("./data.json")
     .then((res) => res.json())
     .then((data) => {
