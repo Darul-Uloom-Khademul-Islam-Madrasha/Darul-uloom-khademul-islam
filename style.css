@@ -749,9 +749,7 @@ input[name="password"] + div {
 }
 
 @media (max-width: 48em) {
-  .profile {
-    margin-top: var(--size-100);
-  }
+ 
 
   .profileForm {
     row-gap: var(--size-500);
