@@ -5,6 +5,9 @@ const optStds = document.querySelector("#stds");
 const resultContainer = document.querySelector(".result-container");
 const resultStatus = document.querySelector("#resultStatus");
 
+
+
+
 let fullResultByYear = [];
 let resultPerStd = [];
 
@@ -247,7 +250,9 @@ function generateResultCard(data) {
   const cardHTML = `
     <div class="result-card">
       <div class="card-header">
-        <div class="logo-area"></div>
+        <div onclick='printContainer()' class="print-area">
+         <img src="./img/print.svg" alt="" srcset="" />
+        </div>
         <h1>পরীক্ষার ফলাফল</h1>
         <div class="w-ornament">✦ ✦ ✦</div>
       </div>
@@ -332,3 +337,17 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 }
+
+
+function printContainer() {
+  if (!resultContainer || !resultContainer.querySelector(".result-card")) {
+    showStatus(
+      "প্রিন্ট করার মতো ফলাফল নেই",
+      "প্রথমে একজন শিক্ষার্থীর ফলাফল নির্বাচন করুন, তারপর প্রিন্ট করুন।"
+    );
+    return;
+  }
+
+  window.print();
+}
+

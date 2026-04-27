@@ -252,6 +252,7 @@ button {
 .result-container {
   display: grid;
   justify-content: center;
+  
 }
 
 .result-card {
@@ -272,6 +273,40 @@ button {
   text-align: center;
   padding: 14px 12px;
   position: relative;
+}
+
+.print-area {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.print-area:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.print-area img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+@media (min-width: 48em) {
+  .card-header {
+    width: 700px;
+  }
+  
 }
 
 .card-header::after {
@@ -299,12 +334,18 @@ button {
   letter-spacing: 1px;
 }
 
-.logo-area {
+.print-area {
+  position: absolute;
+  right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   margin-bottom: 6px;
+}
+
+.print-area img {
+  width: 32px;
 }
 
 .logo-icon {
@@ -524,6 +565,21 @@ button {
   font-size: 24px;
 }
 
+.print-area {
+  top: 12px;
+  right: 12px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  gap: 0;
+}
+
+.print-area img {
+  width: 20px;
+  height: 20px;
+}
+
 @media (max-width: 64em) {
   .resultFilters {
     grid-template-columns: 1fr;
@@ -596,20 +652,82 @@ button {
 }
 
 @media print {
-  body {
-    background: #fff;
+  @page {
+    size: auto;
+    margin: 10mm;
   }
 
-  .resultHero,
-  .resultLookup,
-  .resultStatus {
-    display: none;
+  html,
+  body {
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  .resultCanvas,
+  .resultCanvas *,
+  .result-container,
+  .result-container *,
+  .result-card,
+  .result-card * {
+    visibility: visible !important;
+  }
+
+  .resultShell,
+  .resultCanvas,
+  .result-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: white !important;
   }
 
   .resultCanvas {
-    box-shadow: none;
-    border: 0;
-    margin-top: 0;
-    padding: 0;
+    position: static !important;
+    overflow: visible !important;
+  }
+
+  .result-container {
+    display: block !important;
+  }
+
+  .result-card {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print-area,
+  .resultHero,
+  .resultLookup,
+  .resultStatus {
+    display: none !important;
+  }
+
+  .marks-table {
+    width: 100% !important;
+    margin: 8px 0 0 !important;
+  }
+
+  .marks-table-wrap {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .card-header::after {
+    display: none !important;
   }
 }
