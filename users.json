@@ -40,5 +40,12 @@
     "password": "Dkm1969fc",
     "role": "Teacher",
     "opinion": ""
+  },
+  {
+    "name": "Madrasha",
+    "email": "code.islah@gmail.com",
+    "password": "dukim1969",
+    "role": "Student",
+    "opinion": ""
   }
 ]
