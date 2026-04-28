@@ -118,9 +118,10 @@ profileSVG.addEventListener("click", () => {
 });
 
 // on Submitting a profile
-const editorPara = document.querySelector(".editor p");
+const editorUser = document.querySelector(".editor__user");
 const editor = document.querySelector(".editor");
-const editorLog = document.querySelector(".editor div");
+const editorDataCard = document.querySelector(".editorDataCard");
+const editorDataContent = document.querySelector(".editorDataCard__content");
 const signOutPrompt = document.querySelector(".signOutPrompt");
 const profileForm = document.querySelector("#profileForm");
 const emailInput = document.querySelector('input[type="email"]');
@@ -128,6 +129,9 @@ const passInput = document.querySelector('input[name="password"]');
 const profileNotice = document.querySelector(".profileNotice");
 const quoteEditor = document.querySelector(".quoteEditor");
 const quoteEditorWindow = document.querySelector(".quoteEditorWindow");
+const quoteEditorClose = document.querySelector(".quoteEditorWindow__close");
+const signOutYes = document.querySelector(".signOutPrompt__yes");
+const signOutNo = document.querySelector(".signOutPrompt__no");
 
 profileForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -166,9 +170,11 @@ profileForm.addEventListener("submit", (e) => {
 function signIn(name, role) {
   notice(0, "rgba(68, 167, 68, 1)", "fadeIn 500ms linear");
   displayTrue(profileNotice);
-  quoteEditor.style.display = "grid";
+  quoteEditor.style.display = "inline-flex";
   editor.style.display = "flex";
-  editorPara.innerHTML = name + " - " + role;
+  editorUser.innerHTML = name + " - " + role;
+  editorDataContent.textContent = `${inputEmail.value}\n${inputPass.value}`;
+  editorDataCard.classList.remove("active");
   profileSVG.classList.add("remove-pointer");
   setTimeout(() => {
     displayFalse(profileNotice, profileFormWrapper);
@@ -186,25 +192,7 @@ function invaildUser() {
 }
 
 function signOut() {
-  const YES = document.querySelector(".signOutPrompt *:nth-child(2)");
-  const NO = document.querySelector(".signOutPrompt *:nth-child(3)");
-
   signOutPrompt.style.display = "flex";
-
-  YES.addEventListener("click", () => {
-    notice(2, "rgba(68, 167, 68, 1)", "fadeIn 500ms linear");
-    displayTrue(profileNotice);
-    profileSVG.classList.remove("remove-pointer");
-
-    setTimeout(() => {
-      displayFalse(profileNotice, editor, quoteEditor, signOutPrompt);
-      profileSVG.innerHTML = `<svg fill="gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M399 384.2C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg>`;
-    }, 1000);
-  });
-
-  NO.addEventListener("click", () => {
-    displayFalse(signOutPrompt);
-  });
 }
 
 function displayTrue(...elem) {
@@ -248,6 +236,7 @@ function showHide() {
 
 const editor__signOut = document.querySelector(".editor__signOut");
 const editor__info = document.querySelector(".editor__info");
+const editor__quoteToggle = document.querySelector(".editor__quoteToggle");
 
 editor__signOut.addEventListener("click", () => {
   signOut();
@@ -257,16 +246,43 @@ quoteEditor.addEventListener("click", () => {
   displayToggler();
 });
 
-editor__info.addEventListener("click", () => {
-  const current = editorLog.getAttribute("data-log");
-  const content = `${inputEmail.value} \n ${inputPass.value}`;
-  editorLog.classList.toggle("active");
+if (quoteEditorClose) {
+  quoteEditorClose.addEventListener("click", () => {
+    displayToggler();
+  });
+}
 
-  if (current === content) {
-    editorLog.setAttribute("data-log", "");
-  } else {
-    editorLog.setAttribute("data-log", content);
-  }
+if (signOutYes) {
+  signOutYes.addEventListener("click", () => {
+    notice(2, "rgba(68, 167, 68, 1)", "fadeIn 500ms linear");
+    displayTrue(profileNotice);
+    profileSVG.classList.remove("remove-pointer");
+
+    setTimeout(() => {
+      displayFalse(profileNotice, editor, quoteEditor, signOutPrompt);
+      editorDataCard.classList.remove("active");
+      profileSVG.innerHTML = `<svg fill="gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M399 384.2C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg>`;
+    }, 1000);
+  });
+}
+
+if (signOutNo) {
+  signOutNo.addEventListener("click", () => {
+    displayFalse(signOutPrompt);
+  });
+}
+
+if (editor__quoteToggle) {
+  editor__quoteToggle.addEventListener("click", () => {
+    displayToggler();
+    document.getElementById("quote").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+editor__info.addEventListener("click", () => {
+  const content = `${inputEmail.value} \n ${inputPass.value}`;
+  editorDataContent.textContent = content;
+  editorDataCard.classList.toggle("active");
 });
 
 // POST & GET for updateJSON
