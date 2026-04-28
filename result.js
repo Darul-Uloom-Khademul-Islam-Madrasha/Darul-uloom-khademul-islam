@@ -4,25 +4,21 @@ const optYear = document.querySelector("#year");
 const optStds = document.querySelector("#stds");
 const resultContainer = document.querySelector(".result-container");
 const resultStatus = document.querySelector("#resultStatus");
-
-
-
+let isLoading = false;
 
 let fullResultByYear = [];
 let resultPerStd = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
   await loadResultsFiles();
-   
+
   generateYearsFromSheets();
   resetClassSelect();
   resetStudentSelect();
   showStatus(
     "ফলাফল দেখার জন্য নির্বাচন সম্পূর্ণ করুন",
-    "সাল, শ্রেণী এবং শিক্ষার্থীর নাম নির্বাচন করলে নিচে ফলাফল দেখা যাবে।"
+    "সাল, শ্রেণী এবং শিক্ষার্থীর নাম নির্বাচন করলে নিচে ফলাফল দেখা যাবে।",
   );
-
-  
 });
 
 function setOptions(select, placeholder, items, valueKey, labelKey) {
@@ -32,9 +28,9 @@ function setOptions(select, placeholder, items, valueKey, labelKey) {
         const value = valueKey ? item[valueKey] : item;
         const label = labelKey ? item[labelKey] : item;
         return `<option value="${escapeHtml(String(value))}">${escapeHtml(
-          String(label)
+          String(label),
         )}</option>`;
-      })
+      }),
     )
     .join("");
 
@@ -67,34 +63,46 @@ optYear.addEventListener("change", async (e) => {
   if (!selectedYear) {
     showStatus(
       "ফলাফল দেখার জন্য নির্বাচন সম্পূর্ণ করুন",
-      "প্রথমে পরীক্ষার সাল নির্বাচন করুন।"
+      "প্রথমে পরীক্ষার সাল নির্বাচন করুন।",
     );
     return;
   }
 
+  const resultStatus__card = document.querySelector(".resultStatus__card");
+  
+  
+  isLoading = true;
   showStatus(
     "তথ্য প্রস্তুত করা হচ্ছে",
-    "নির্বাচিত সালের ফলাফল তালিকা লোড করা হচ্ছে।"
+    "নির্বাচিত সালের ফলাফল তালিকা লোড করা হচ্ছে।",
   );
 
   const url = sheetUrl.find((sheet) => sheet.includes(selectedYear));
-  
- const fileUrl = `https://raw.githubusercontent.com/Darul-Uloom-Khademul-Islam-Madrasha/Darul-uloom-khademul-islam/main/public/results/${url}`;
 
- await fetchAndParseMadrashaExcel(fileUrl);
+  const fileUrl = `https://raw.githubusercontent.com/Darul-Uloom-Khademul-Islam-Madrasha/Darul-uloom-khademul-islam/main/public/results/${url}`;
+
+  await fetchAndParseMadrashaExcel(fileUrl);
+  isLoading = false;
+  
 
   if (fullResultByYear.length) {
-    setOptions(optClass, "শ্রেণী / মারহালা নির্বাচন করুন", fullResultByYear, "className", "className");
+    setOptions(
+      optClass,
+      "শ্রেণী / মারহালা নির্বাচন করুন",
+      fullResultByYear,
+      "className",
+      "className",
+    );
     showStatus(
       "শ্রেণী নির্বাচন করুন",
-      "এখন আপনার প্রয়োজনীয় শ্রেণী বা মারহালা নির্বাচন করুন।"
+      "এখন আপনার প্রয়োজনীয় শ্রেণী বা মারহালা নির্বাচন করুন।",
     );
   }
 });
 
 optClass.addEventListener("change", (e) => {
   const selectedClass = fullResultByYear.find(
-    (item) => item.className === e.target.value
+    (item) => item.className === e.target.value,
   );
 
   resetStudentSelect();
@@ -104,16 +112,22 @@ optClass.addEventListener("change", (e) => {
     resultPerStd = [];
     showStatus(
       "শিক্ষার্থীর নাম নির্বাচন বাকি আছে",
-      "উপযুক্ত ফলাফল দেখতে আগে একটি শ্রেণী নির্বাচন করুন।"
+      "উপযুক্ত ফলাফল দেখতে আগে একটি শ্রেণী নির্বাচন করুন।",
     );
     return;
   }
 
   resultPerStd = selectedClass.students;
-  setOptions(optStds, "ছাত্র / ছাত্রী নির্বাচন করুন", selectedClass.students, "name", "name");
+  setOptions(
+    optStds,
+    "ছাত্র / ছাত্রী নির্বাচন করুন",
+    selectedClass.students,
+    "name",
+    "name",
+  );
   showStatus(
     "শিক্ষার্থীর নাম নির্বাচন করুন",
-    "এখন এই শ্রেণীর ছাত্র বা ছাত্রীর নাম নির্বাচন করুন।"
+    "এখন এই শ্রেণীর ছাত্র বা ছাত্রীর নাম নির্বাচন করুন।",
   );
 });
 
@@ -124,7 +138,7 @@ optStds.addEventListener("change", (e) => {
     resultContainer.innerHTML = "";
     showStatus(
       "ফলাফল দেখার জন্য নির্বাচন সম্পূর্ণ করুন",
-      "শিক্ষার্থীর নাম নির্বাচন করলে ফলাফল কার্ড নিচে দেখা যাবে।"
+      "শিক্ষার্থীর নাম নির্বাচন করলে ফলাফল কার্ড নিচে দেখা যাবে।",
     );
     return;
   }
@@ -132,7 +146,7 @@ optStds.addEventListener("change", (e) => {
   generateResultCard(std);
   showStatus(
     "ফলাফল প্রস্তুত",
-    "নির্বাচিত শিক্ষার্থীর ফলাফল কার্ড নিচে দেখানো হয়েছে।"
+    "নির্বাচিত শিক্ষার্থীর ফলাফল কার্ড নিচে দেখানো হয়েছে।",
   );
 });
 
@@ -153,7 +167,10 @@ async function fetchAndParseMadrashaExcel(url) {
 
     workbook.SheetNames.forEach((sheetName, sIdx) => {
       const worksheet = workbook.Sheets[sheetName];
-      const rows = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
+      const rows = XLSX.utils.sheet_to_json(worksheet, {
+        header: 1,
+        defval: "",
+      });
 
       if (!rows.length) return;
 
@@ -197,7 +214,14 @@ async function fetchAndParseMadrashaExcel(url) {
             if (!val) return;
             colMap[val] = idx;
 
-            const nonSubjects = ["ক্র. নং.", "পরীক্ষার্থীর নাম", "মোট", "গড়", "বিভাগ", "স্থান"];
+            const nonSubjects = [
+              "ক্র. নং.",
+              "পরীক্ষার্থীর নাম",
+              "মোট",
+              "গড়",
+              "বিভাগ",
+              "স্থান",
+            ];
             if (!nonSubjects.includes(val)) subjectsList.push(val);
           });
           if (currentExam) currentExam.subjects = subjectsList;
@@ -230,7 +254,7 @@ async function fetchAndParseMadrashaExcel(url) {
     console.error("Error:", error);
     showStatus(
       "ফলাফল লোড করা যায়নি",
-      "দয়া করে আবার চেষ্টা করুন অথবা ফাইল সংযোগ পরীক্ষা করুন।"
+      "দয়া করে আবার চেষ্টা করুন অথবা ফাইল সংযোগ পরীক্ষা করুন।",
     );
   }
 }
@@ -240,7 +264,9 @@ function toBengaliNumeral(num) {
   return num
     .toString()
     .split("")
-    .map((digit) => (Number.isNaN(Number(digit)) ? digit : bengaliDigits[parseInt(digit, 10)]))
+    .map((digit) =>
+      Number.isNaN(Number(digit)) ? digit : bengaliDigits[parseInt(digit, 10)],
+    )
     .join("");
 }
 
@@ -330,7 +356,7 @@ function generateSubjectRows(marks) {
 function showStatus(title, message) {
   if (!resultStatus) return;
   resultStatus.innerHTML = `
-    <div class="resultStatus__card">
+    <div class="resultStatus__card ${isLoading ? 'loading': ''}">
       <h3>${escapeHtml(title)}</h3>
       <p>${escapeHtml(message)}</p>
     </div>`;
@@ -345,12 +371,11 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
-
 function printContainer() {
   if (!resultContainer || !resultContainer.querySelector(".result-card")) {
     showStatus(
       "প্রিন্ট করার মতো ফলাফল নেই",
-      "প্রথমে একজন শিক্ষার্থীর ফলাফল নির্বাচন করুন, তারপর প্রিন্ট করুন।"
+      "প্রথমে একজন শিক্ষার্থীর ফলাফল নির্বাচন করুন, তারপর প্রিন্ট করুন।",
     );
     return;
   }
@@ -358,19 +383,14 @@ function printContainer() {
   window.print();
 }
 
-
-
 async function loadResultsFiles() {
   try {
-    const response = await fetch('/.netlify/functions/resultsList');
+    const response = await fetch("/.netlify/functions/resultsList");
     const data = await response.json();
-    
+
     const files = data.files;
     sheetUrl = files;
-    
-    
   } catch (error) {
-    console.error('Error loading files:', error);
+    console.error("Error loading files:", error);
   }
 }
-

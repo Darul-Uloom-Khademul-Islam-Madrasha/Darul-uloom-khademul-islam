@@ -731,3 +731,52 @@ button {
     display: none !important;
   }
 }
+
+
+.resultStatus__card {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Loading state */
+.resultStatus__card.loading {
+  background: #f5f5f5;
+}
+
+/* shimmer overlay */
+.resultStatus__card.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(244 231 194),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+  pointer-events: none;
+}
+
+/* keep text visible */
+.resultStatus__card.loading h3,
+.resultStatus__card.loading p {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 100%;
+  }
+}
