@@ -78,7 +78,8 @@ optYear.addEventListener("change", async (e) => {
   );
 
   const url = sheetUrl.find((sheet) => sheet.includes(selectedYear));
-  await fetchAndParseMadrashaExcel('results/'+url);
+  
+  await fetchAndParseMadrashaExcel('/results/'+url);
 
   if (fullResultByYear.length) {
     setOptions(optClass, "শ্রেণী / মারহালা নির্বাচন করুন", fullResultByYear, "className", "className");

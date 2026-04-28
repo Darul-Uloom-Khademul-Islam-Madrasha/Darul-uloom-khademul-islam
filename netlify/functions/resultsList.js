@@ -4,7 +4,7 @@ exports.handler = async () => {
       "https://api.github.com/repos/Darul-Uloom-Khademul-Islam-Madrasha/Darul-uloom-khademul-islam/contents/public/results",
       {
         headers: {
-          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        //  Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
           Accept: "application/vnd.github+json",
         },
       }
