@@ -79,7 +79,9 @@ optYear.addEventListener("change", async (e) => {
 
   const url = sheetUrl.find((sheet) => sheet.includes(selectedYear));
   
-  await fetchAndParseMadrashaExcel('/results/'+url);
+ const fileUrl = `https://raw.githubusercontent.com/Darul-Uloom-Khademul-Islam-Madrasha/Darul-uloom-khademul-islam/main/public/results/${url}`;
+
+ await fetchAndParseMadrashaExcel(fileUrl);
 
   if (fullResultByYear.length) {
     setOptions(optClass, "শ্রেণী / মারহালা নির্বাচন করুন", fullResultByYear, "className", "className");
