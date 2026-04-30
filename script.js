@@ -458,7 +458,7 @@ editor__upload.addEventListener("click", (e) => {
 
 // Delete Result
 
-async function deleteResult(file) {
+async function deleteResult(fileName) {
     const confirmDelete = confirm(`Are you sure you want to delete ${fileName}?`);
 
   if (!confirmDelete) return;
