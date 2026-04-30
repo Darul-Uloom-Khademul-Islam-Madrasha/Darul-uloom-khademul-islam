@@ -242,6 +242,10 @@ p {
   box-shadow: 0 1px 1px -0.5px var(--clr-quote-text);
 }
 
+button {
+  cursor: pointer;
+}
+
 .remove-pointer {
   pointer-events: none;
 }
@@ -4166,6 +4170,10 @@ iframe {
   justify-content: space-between;
   align-items: center;
   gap: var(--size-200);
+}
+
+.result__uploaded > span span {
+  cursor: pointer;
 }
 
 

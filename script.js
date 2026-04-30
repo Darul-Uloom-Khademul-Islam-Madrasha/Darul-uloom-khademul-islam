@@ -392,7 +392,7 @@ editor__upload.addEventListener("click", (e) => {
             files.length > 0
               ? files
                   .map((file) => {
-                    return `<span>${file} <span>&#9999;</span><span onclick='deleteResult(${file})'>&#10005;</span></span>`;
+                    return `<span>${file} <span>&#9999;</span><span onclick='deleteResult("${file}")'>&#10005;</span></span>`;
                   })
                   .join('')
               : ""
