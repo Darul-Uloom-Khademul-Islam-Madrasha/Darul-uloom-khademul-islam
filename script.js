@@ -392,7 +392,7 @@ editor__upload.addEventListener("click", (e) => {
             files.length > 0
               ? files
                   .map((file) => {
-                    return `<span>${file}</span>`;
+                    return `<span>${file} <span>&#9999;</span><span onclick='deleteResult(${file})'>&#10005;</span></span>`;
                   })
                   .join('')
               : ""
@@ -454,6 +454,32 @@ editor__upload.addEventListener("click", (e) => {
   })
 
 });
+
+
+// Delete Result
+
+async function deleteResult(file) {
+    const confirmDelete = confirm(`Are you sure you want to delete ${fileName}?`);
+
+  if (!confirmDelete) return;
+
+  const res = await fetch("/.netlify/functions/deleteResult", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ fileName }),
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    alert("ফাইল সফলভাবে ডিলিট হয়েছে");
+    loadResultsFiles();
+  } else {
+    alert(data.error);
+  }
+}
 
 
 

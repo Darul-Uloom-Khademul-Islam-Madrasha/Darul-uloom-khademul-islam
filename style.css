@@ -569,7 +569,6 @@ span:active,
   user-select: none;
 }
 
-
 .profileNotice {
   position: fixed;
   top: calc(var(--size-100) - 5px);
@@ -2861,7 +2860,6 @@ button:hover,
 }
 
 .editor {
-  
   top: 1rem;
   right: 1rem;
   padding: 0.8rem 1rem;
@@ -3641,8 +3639,6 @@ iframe {
   box-sizing: initial;
 }
 
-
-
 .headerTicker__item > div {
   display: flex;
   gap: 1rem;
@@ -3705,7 +3701,6 @@ iframe {
   border: 1px solid rgba(201, 164, 92, 0.24);
   box-shadow: 0 26px 60px rgba(8, 37, 24, 0.22);
 }
-
 
 .editor .editorPanel div::before {
   content: none !important;
@@ -4140,6 +4135,73 @@ iframe {
 }
 
 .result__uploaded {
-  max-height: 350px;
-  overflow-y: scroll;
+  display: grid;
+  gap: 0.95rem;
+  align-items: center;
+  padding: 0.9rem;
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(242, 247, 241, 0.92)
+  );
+  border: 1px solid rgba(15, 78, 52, 0.08);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+  counter-reset: my-counter;
+}
+
+.result__uploaded > span {
+  background: rgba(217, 239, 227, 0.72);
+  color: var(--clr-accent-deep);
+  font-weight: 700;
+  border-radius: 15px;
+  padding: var(--size-100);
+  counter-increment: my-counter;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: min-content 60% 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--size-200);
+}
+
+
+.result__uploaded > span::before {
+  content: counter(my-counter) ". ";
+  background: rgba(17, 88, 56, 0.12);
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  font-weight: bold;
+  font-size: larger;
+  border-radius: 50%;
+  margin-left: var(--size-200);
+}
+.result__uploaded > span span {
+  background: rgba(17, 88, 56, 0.12);
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  font-weight: bold;
+  font-size: larger;
+  border-radius: 50%;
+}
+
+.result__uploaded > span span:last-child {
+  background: #f44336;
+  color: #f4e7c2;
+}
+
+
+#resultUpload__form > .quoteEditorWindow__actions {
+  margin-top: var(--size-300);
+}
+
+#resultUpload__form .quoteEditorWindow__actions button[type='reset'] {
+  background: #f44336;
 }
