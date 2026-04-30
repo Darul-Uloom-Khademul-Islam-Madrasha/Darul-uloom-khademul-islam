@@ -1,6 +1,10 @@
 // GET from local repo's data.json file on window.load
 
+let files = [];
+
 window.onload = () => {
+  files = grabAvailableFiles();
+  
   fetch("./data.json")
     .then((res) => res.json())
     .then((data) => {
@@ -16,6 +20,26 @@ window.onload = () => {
     })
     .catch((error) => console.log("Fetch error: ", error));
 };
+
+ function grabAvailableFiles() {
+ fetch(
+    "https://api.github.com/repos/Darul-Uloom-Khademul-Islam-Madrasha/Darul-uloom-khademul-islam/contents/public/results",
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+      },
+    },
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      const mapped = data.map((file) => {
+        return file.name;
+      });
+      files = mapped;
+    });
+
+  return files;
+}
 
 const theme = document.querySelector("#theme");
 const menuBtn = document.querySelector(".nav h2 svg");
@@ -37,17 +61,14 @@ menuBtn.addEventListener("click", () => {
   }
 });
 
-
-
-
-
-
 // scroll events
 
 const prefersReducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
+  "(prefers-reduced-motion: reduce)",
 ).matches;
-const animatedElements = Array.from(document.querySelectorAll(".animateScroll"));
+const animatedElements = Array.from(
+  document.querySelectorAll(".animateScroll"),
+);
 
 animatedElements.forEach((element, index) => {
   element.style.setProperty("--stagger-index", index % 8);
@@ -65,7 +86,7 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
         }
       });
     },
-    { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+    { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
   );
 
   animatedElements.forEach((element) => {
@@ -73,35 +94,48 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
   });
 }
 
-document.querySelectorAll(".title, .mergeNav, .quote-wrapper").forEach((card) => {
-  card.addEventListener("pointermove", (event) => {
-    const bounds = card.getBoundingClientRect();
-    const x = ((event.clientX - bounds.left) / bounds.width) * 100;
-    const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+document
+  .querySelectorAll(".title, .mergeNav, .quote-wrapper")
+  .forEach((card) => {
+    card.addEventListener("pointermove", (event) => {
+      const bounds = card.getBoundingClientRect();
+      const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+      const y = ((event.clientY - bounds.top) / bounds.height) * 100;
 
-    card.style.setProperty("--pointer-x", `${x}%`);
-    card.style.setProperty("--pointer-y", `${y}%`);
-  });
+      card.style.setProperty("--pointer-x", `${x}%`);
+      card.style.setProperty("--pointer-y", `${y}%`);
+    });
 
-  card.addEventListener("pointerleave", () => {
-    card.style.removeProperty("--pointer-x");
-    card.style.removeProperty("--pointer-y");
+    card.addEventListener("pointerleave", () => {
+      card.style.removeProperty("--pointer-x");
+      card.style.removeProperty("--pointer-y");
+    });
   });
-});
 
 // profile page
 
 const profile = document.querySelector(".profile");
 const profileFormWrapper = document.querySelector(".profileFormWrapper");
 const profileSVG = document.querySelector(".profile > svg");
+const editorPanel = document.querySelector(".editorPanel");
+
+let isSignedIn = false;
 
 profileSVG.addEventListener("click", () => {
   profile.classList.toggle("toggleProfile");
 
+  if (isSignedIn) {
+    editorPanel.classList.toggle("d-none");
+    profileSVG.innerHTML =
+      '<svg viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>user-profile-filled</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="drop" fill="#fff2d4" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C269.912851,3.55271368e-14 324.175019,22.4761259 364.18278,62.4838867 C404.190541,102.491647 426.666667,156.753816 426.666667,213.333333 C426.666667,331.15408 331.15408,426.666667 213.333333,426.666667 C95.5125867,426.666667 2.84217094e-14,331.15408 2.84217094e-14,213.333333 C2.84217094e-14,95.5125867 95.5125867,3.55271368e-14 213.333333,3.55271368e-14 Z M234.666667,234.666667 L192,234.666667 C139.18529,234.666667 93.8415802,266.653822 74.285337,312.314895 C105.229171,355.70638 155.977088,384 213.333333,384 C270.689579,384 321.437496,355.70638 352.381644,312.31198 C332.825087,266.653822 287.481377,234.666667 234.666667,234.666667 L234.666667,234.666667 Z M213.333333,64 C177.987109,64 149.333333,92.653776 149.333333,128 C149.333333,163.346224 177.987109,192 213.333333,192 C248.679557,192 277.333333,163.346224 277.333333,128 C277.333333,92.653776 248.679557,64 213.333333,64 Z"> </path> </g> </g> </g></svg>';
+  }
+
+  if (isSignedIn) return;
+
   if (profileFormWrapper.style.display === "grid") {
     profileFormWrapper.style.display = "none";
     profileSVG.innerHTML = `<svg
-            fill="#333"
+           
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
           >
@@ -170,6 +204,9 @@ profileForm.addEventListener("submit", (e) => {
 function signIn(name, role) {
   notice(0, "rgba(68, 167, 68, 1)", "fadeIn 500ms linear");
   displayTrue(profileNotice);
+
+  profileFormWrapper.style.display = "none";
+  isSignedIn = true;
   quoteEditor.style.display = "inline-flex";
   editor.style.display = "flex";
   editorUser.innerHTML = name + " - " + role;
@@ -275,7 +312,9 @@ if (signOutNo) {
 if (editor__quoteToggle) {
   editor__quoteToggle.addEventListener("click", () => {
     displayToggler();
-    document.getElementById("quote").scrollIntoView({ behavior: "smooth", block: "start" });
+    document
+      .getElementById("quote")
+      .scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
@@ -330,3 +369,92 @@ const buttons = document.querySelectorAll(".mainNav li");
 buttons.forEach((button) => {
   button.addEventListener("click", createRipple);
 });
+
+// uploading handling
+
+const editor__upload = document.querySelector(".editor__upload");
+
+editor__upload.addEventListener("click", (e) => {
+  e.stopPropagation();
+  editorPanel.innerHTML = `
+  <form id="resultUpload__form" class="quoteEditorWindow">
+          <div class="quoteEditorWindow__head">
+            <div>
+              <div class="headerTicker__label">একাডেমিক পোর্টাল</div>
+              
+            </div>
+            <button type="button" class="btn">Close</button>
+          </div>
+          <div>
+          <p>ফলাফল উপলব্ধ</p>
+          <div class='result__uploaded'>
+          ${
+            files.length > 0
+              ? files
+                  .map((file) => {
+                    return `<span>${file}</span>`;
+                  })
+                  .join('')
+              : ""
+          }
+          </div>
+          <label class="quoteEditorWindow__field quoteEditorWindow__field--full" for="quote__ref">
+           
+            <input type="file" accept=".xlsx,.xls" name="result__uploader" id="result__uploader" placeholder="UPLOAD" required />
+          </label>
+          </div>
+          <div class="quoteEditorWindow__actions">
+            <button type="reset" class="btn">Reset</button>
+            <button type="submit" class="btn">Post</button>
+          </div>
+        </form>
+  `;
+
+  const resultUpload__form = editorPanel.querySelector('#resultUpload__form');
+  
+
+  resultUpload__form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+     const file = e.currentTarget.elements.result__uploader.files[0];
+    if (!file) {
+    alert("ফাইল নির্বাচন করুন");
+    return;
+  }
+
+    const reader = new FileReader();
+
+    reader.onload = async () => {
+      try {
+        const base64Content = reader.result.split(",")[1];
+         const response = await fetch("/.netlify/functions/uploadResult", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fileName: file.name,
+          content: base64Content,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        alert("ফাইল সফলভাবে আপলোড হয়েছে");
+      } else {
+        alert(data.error);
+      }
+      } 
+      catch (error) {
+      console.error(error);
+      alert("আপলোড ব্যর্থ হয়েছে");
+    }
+    }
+      reader.readAsDataURL(file);
+    
+  })
+
+});
+
+
+
+

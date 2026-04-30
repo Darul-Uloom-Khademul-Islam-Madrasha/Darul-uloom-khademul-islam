@@ -569,6 +569,7 @@ span:active,
   user-select: none;
 }
 
+
 .profileNotice {
   position: fixed;
   top: calc(var(--size-100) - 5px);
@@ -2490,7 +2491,6 @@ form.container.onReg::before,
 }
 
 #quote__header {
-  font-size: clamp(2rem, 3vw, 3rem);
   color: var(--clr-quote-header) !important;
 }
 
@@ -2861,6 +2861,7 @@ button:hover,
 }
 
 .editor {
+  
   top: 1rem;
   right: 1rem;
   padding: 0.8rem 1rem;
@@ -3677,12 +3678,12 @@ iframe {
 }
 
 .editor {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
+  position: absolute;
+  top: 5rem;
   z-index: 120;
   display: none;
-  width: min(960px, calc(100vw - 2rem));
+  left: 50%;
+  transform: translateX(-25%);
   padding: 0;
   background: transparent;
   border: 0;
@@ -3691,9 +3692,8 @@ iframe {
 
 .editorPanel {
   position: relative;
-  width: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  width: 100%;
   gap: 1rem;
   padding: 1.15rem;
   border-radius: 24px;
@@ -4131,4 +4131,15 @@ iframe {
   .quoteEditorWindow__actions {
     grid-column: auto;
   }
+}
+
+/* result upload page */
+
+.result__uploader {
+  display: grid;
+}
+
+.result__uploaded {
+  max-height: 350px;
+  overflow-y: scroll;
 }
